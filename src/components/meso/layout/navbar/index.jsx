@@ -14,6 +14,8 @@ import HpLandingPages from '../../homePages/landingPages';
 import HpLearning from '../../homePages/learning';
 import HpPrice from '../../homePages/price';
 import HpEmailMarketing from '../../homePages/emailMarketing';
+// Components - Micro
+import Logo from '../../../micro/logo';
 
 const titles = require('../../../contents/titles.json');
 
@@ -23,9 +25,9 @@ const style = styles();
 const [navTab, setNavTab] = useState(0);
 
 return(
-    <div >
+    <div className='home_navbar'>
         <AppBar position='static' className={style.navbar}>
-            <h1>Jack</h1>
+           <Logo/>
             <Tabs value={navTab} onChange={(event,newVal)=>setNavTab(newVal)}>
                 <Tab 
                     label={titles.navBar.home} 
@@ -55,6 +57,7 @@ return(
             <h2>Registro</h2>
             <h2>Inicio</h2>
         </AppBar>
+        <div className='swipeable_holder'>
         <SwipeableViews index={navTab}>
             <div 
                 role='tabpanel'
@@ -105,6 +108,7 @@ return(
                 <HpLearning/>
             </div>
         </SwipeableViews>
+        </div>
     </div>
 );
 };

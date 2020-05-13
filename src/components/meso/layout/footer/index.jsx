@@ -3,8 +3,8 @@ import React from 'react';
 
 const Footer = () =>{
     return(
-    <footer>
-        © Jack 2020
+    <footer className='footer'>
+        © JACK 2020
     </footer>);
 }
 

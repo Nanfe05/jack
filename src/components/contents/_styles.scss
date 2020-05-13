@@ -1,0 +1,14 @@
+// Reset css
+@import './styles/reset';
+// Fonts
+@import './styles/fonts';
+// Colors
+@import './styles/colors';
+
+// Macro 
+
+// Meso 
+@import '../meso/layout/navbar/navbar';
+@import '../meso/layout/footer/footer';
+// Micro
+@import '../micro/logo/logo';

@@ -1,0 +1,18 @@
+.logo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 15px;
+    margin-left: 30px;
+    font-family: logo;
+    width: auto;
+    img{
+        width: 45px;
+    }
+    h1{
+        font-size: 45px;
+        margin-right: 10px;
+        color: $blue;
+    }
+}

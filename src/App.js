@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from './components/macro/home';
-// Reset CSS
-import './reset.css'
+// Styles
+import './components/contents/_styles.scss';
 
 function App() {
   return (
