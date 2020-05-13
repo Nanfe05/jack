@@ -1,0 +1,39 @@
+.home_navbar{
+    height: 93vh;
+    display: flex;
+    flex-direction: column;
+    .MuiPaper-root{
+        box-shadow: none;
+    }
+    .MuiAppBar-colorPrimary{
+        background-color: white;
+    }
+    .MuiTabs-root{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 60%;
+        color: $blue;
+    }
+    .MuiTab-root{
+        font-family: font-bold;
+        white-space: pre;
+        font-size: 14px;
+        width: auto;
+        min-width: 110px;
+        text-align: center;
+    }
+    .PrivateTabIndicator-root-65{
+        height: 4px;
+    }
+    .PrivateTabIndicator-colorSecondary-67{
+        background-color: $blue;
+    }
+    >.swipeable_holder{
+      flex-grow: 1;
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    }
+}

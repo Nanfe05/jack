@@ -1,9 +1,9 @@
 {
     "navBar":{
         "home":"inicio",
-        "landingPages":"Landing Pages",
-        "emailMarketing":"Email Marketing",
-        "funnelChannel":"Embudo de Ventas",
+        "landingPages":"Landing \n Pages",
+        "emailMarketing":"Email \n Marketing",
+        "funnelChannel":"Embudo \n de Ventas",
         "price":"Prices",
         "learning":"Cursos"
     }
