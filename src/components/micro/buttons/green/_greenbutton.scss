@@ -1,0 +1,19 @@
+.MuiButtonBase-root{
+
+    &.signup_button{
+        font-family:font-bold;
+        font-size: 16px;
+        color: white;
+        min-width: 100px;
+        height: min-content;
+        margin: 0 10px;
+        background-image: linear-gradient(to left,$green,$green-2);
+        &:hover{
+            background-image: linear-gradient(to left,$green,$green-2);
+        }
+        &.wide{
+            width: 100%;
+            margin: 0px;
+        }
+    }
+}

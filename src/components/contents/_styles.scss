@@ -6,10 +6,17 @@
 @import './styles/colors';
 
 // Macro 
-
+@import '../macro/login/login';
+@import '../macro/signup/signup';
+@import '../macro/dashboard/dashboard';
 // Meso 
 @import '../meso/layout/navbar/navbar';
+@import '../meso/layout/dbNavbar/dbNavbar';
+@import '../meso/layout/dbHeader/dbHeader';
 @import '../meso/layout/footer/footer';
 @import '../meso/homePages/home/hp_home';
 // Micro
 @import '../micro/logo/logo';
+@import '../micro/buttons/blue/bluebutton';
+@import '../micro/buttons/green/greenbutton';
+@import '../micro/buttons/google/gbutton';

@@ -1,0 +1,17 @@
+.MuiButtonBase-root.button_mult_signup{
+    width: 100%;
+    font-family: font-bold;
+    font-size: 16px;
+    border: 2px solid black;
+    margin-bottom: 10px;
+    &>span{
+        justify-content: start;
+        text-transform: none;
+    }
+    .signup_icon{
+       width: 24px;
+       height: 24px;
+       margin-left: 10px;
+       margin-right: 30px;
+    }
+}   

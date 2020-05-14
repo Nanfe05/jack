@@ -4,7 +4,6 @@ import React, {useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Button from '@material-ui/core/Button';
 import { makeStyles} from '@material-ui/core/styles';
 // Additional Libraries
 import SwipeableViews from 'react-swipeable-views';
@@ -17,6 +16,8 @@ import HpPrice from '../../homePages/price';
 import HpEmailMarketing from '../../homePages/emailMarketing';
 // Components - Micro
 import Logo from '../../../micro/logo';
+import BlueButton from '../../../micro/buttons/blue/';
+import GreenButton from '../../../micro/buttons/green/'
 
 const titles = require('../../../contents/titles.json');
 
@@ -55,12 +56,9 @@ return(
                     id={`${titles.navBar.learning.replace(' ','').toLowerCase()}_${5}`}
                 />
             </Tabs>
-            <Button className='navbar-button login' onClick={props.openLogin}>
-                Inicio
-            </Button>
-            <Button className='navbar-button signup' onClick={props.openSignup}>
-                Registro
-            </Button>
+            <BlueButton action={props.openLogin} label='Inicio'/>
+            <GreenButton action={props.openSignup} label='Registrate'/>
+            
         </AppBar>
         <div className='swipeable_holder'>
         <SwipeableViews index={navTab}>
