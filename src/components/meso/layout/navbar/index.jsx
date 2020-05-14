@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Button from '@material-ui/core/Button';
 import { makeStyles} from '@material-ui/core/styles';
 // Additional Libraries
 import SwipeableViews from 'react-swipeable-views';
@@ -19,7 +20,7 @@ import Logo from '../../../micro/logo';
 
 const titles = require('../../../contents/titles.json');
 
-const NavBar = () =>{
+const NavBar = (props) =>{
 const style = styles();
 
 const [navTab, setNavTab] = useState(0);
@@ -33,29 +34,33 @@ return(
                     label={titles.navBar.home} 
                     id={`${titles.navBar.home.replace(' ','').toLowerCase()}_${0}`}
                 />
-                <Tab 
+                <Tab disabled
                     label={titles.navBar.landingPages}
                     id={`${titles.navBar.landingPages.replace(' ','').toLowerCase()}_${1}`}
                 />
-                <Tab 
+                <Tab disabled
                     label={titles.navBar.emailMarketing}
                     id={`${titles.navBar.emailMarketing.replace(' ','').toLowerCase()}_${2}`}
                 />
-                <Tab 
+                <Tab disabled
                     label={titles.navBar.funnelChannel} 
                     id={`${titles.navBar.funnelChannel.replace(' ','').toLowerCase()}_${3}`}
                 />
-                <Tab 
+                <Tab disabled
                     label={titles.navBar.price}
                     id={`${titles.navBar.price.replace(' ','').toLowerCase()}_${4}`}
                 />
-                <Tab 
+                <Tab disabled
                     label={titles.navBar.learning}
                     id={`${titles.navBar.learning.replace(' ','').toLowerCase()}_${5}`}
                 />
             </Tabs>
-            <h2>Registro</h2>
-            <h2>Inicio</h2>
+            <Button className='navbar-button login' onClick={props.openLogin}>
+                Inicio
+            </Button>
+            <Button className='navbar-button signup' onClick={props.openSignup}>
+                Registro
+            </Button>
         </AppBar>
         <div className='swipeable_holder'>
         <SwipeableViews index={navTab}>
@@ -109,6 +114,7 @@ return(
             </div>
         </SwipeableViews>
         </div>
+       
     </div>
 );
 };

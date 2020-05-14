@@ -4,6 +4,8 @@
     flex-direction: column;
     .MuiPaper-root{
         box-shadow: none;
+        justify-content: center;
+        align-items: center;
     }
     .MuiAppBar-colorPrimary{
         background-color: white;
@@ -32,8 +34,43 @@
     }
     >.swipeable_holder{
       flex-grow: 1;
-    //   display: flex;
-    //   justify-content: center;
-    //   align-items: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &>div{
+          height: 100%;
+          width: 100%;
+          &>div{
+            height: 100%;
+            width: 100%;
+            &>div{
+                height: 100%;
+                width: 100%;
+                &>div{
+                    height: 100%;
+                    width: 100%;
+                  }  
+              }  
+          }        
+        }
     }
+    
+    .MuiButtonBase-root{
+        &.login,
+        &.signup{
+            font-family:font-bold;
+            font-size: 16px;
+            color: white;
+            min-width: 100px;
+            height: min-content;
+            margin: 0 10px;
+        }
+        &.login{
+            background-color: $blue;
+        }
+        &.signup{
+            background-image: linear-gradient(to left,$green,$green-2);
+        }
+    }
+    
 }
