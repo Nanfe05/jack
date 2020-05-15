@@ -1,5 +1,6 @@
 .dbLanding_holder{
     height: 100%;
+    width: 80vw;
     flex-grow: 1;
     padding: 0 10px;
     .display_landingpages{
@@ -23,10 +24,6 @@
     }
 }
 .add_landing_page{
-    height: 250px;
-    width: 200px;
-    border: 2px dashed lightgrey;
-    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -36,7 +33,13 @@
     }
 
     &.MuiButtonBase-root{
+        border: 2px dashed lightgrey;
+        width: 200px;
+        min-width: 200px;
         margin: 0 20px;
         padding: 0px;
+        height: 250px;
+        margin: 0 15px;
+        border-radius: 10px;
     }
 }

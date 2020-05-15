@@ -10,13 +10,14 @@
 }
 
 .dbhome_image{
-    height: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
-
+    align-items: center;
     
     &>img{
         
+        max-width: 900px;
         width: 80%;
     }
 }
