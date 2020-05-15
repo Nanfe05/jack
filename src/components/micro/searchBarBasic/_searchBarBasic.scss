@@ -1,0 +1,19 @@
+.searchbar_basic_holder{
+    width: 80vw;
+    min-height: 150px;
+    border-radius: 20px;
+    background-color: $light-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3px;
+    .searchbar_basic.MuiFormControl-root{
+        background-color: white;
+        border-radius: 3px;
+        width: 350px;
+        font-family: font_regular;
+    }
+    .MuiInputAdornment-root{
+        color: $grey;
+    }
+}

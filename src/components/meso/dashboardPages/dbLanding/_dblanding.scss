@@ -1,0 +1,42 @@
+.dbLanding_holder{
+    height: 100%;
+    flex-grow: 1;
+    padding: 0 10px;
+    .display_landingpages{
+        height: 75%;
+        overflow-y: auto;
+        padding: 15px;
+        &>h2{
+
+            font-family:font-bold ;
+            padding: 15px 0;
+            font-size: 18px;
+        }
+        .landingpages_holder{
+            min-height: 250px;
+            display: flex;
+            flex-direction: row;
+            width: 90%;
+            overflow-x: auto;
+            padding: 20px;
+        }
+    }
+}
+.add_landing_page{
+    height: 250px;
+    width: 200px;
+    border: 2px dashed lightgrey;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: lightgrey;
+    &>.MuiSvgIcon-root{
+        font-size: 70px;
+    }
+
+    &.MuiButtonBase-root{
+        margin: 0 20px;
+        padding: 0px;
+    }
+}
