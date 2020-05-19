@@ -1,7 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 // Redux 
 import {connect} from 'react-redux';
 import {switchHomeTab,switchLogin,switchSignup,switchIsUserLogged} from '../../../../redux/actions/uiGeneral';
+// React Router
+//import {useHistory} from 'react-router-dom';
 // Material UI
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -10,8 +12,8 @@ import { makeStyles} from '@material-ui/core/styles';
 
 // Components - Micro
 import Logo from '../../../micro/logo';
-import BlueButton from '../../../micro/buttons/blue/';
-import GreenButton from '../../../micro/buttons/green/'
+import ColorsButton from '../../../micro/buttons/colorsButton/';
+
 
 // Modals
 import Login from '../../../macro/login/';
@@ -56,13 +58,20 @@ NAVBAR OPTIONS
                     id={`${titles.navBar.learning.replace(' ','').toLowerCase()}_${5}`}
                 />
             </Tabs>
-            <BlueButton action={loginForm} label='Inicio'/>
-            <GreenButton action={signupForm} label='Registrate'/>
+            <ColorsButton action={loginForm} label='Inicio' classes='blue'/>
+            <ColorsButton action={signupForm} label='Registrate' classes='green'/>
         </AppBar>
         );
     }
 
-
+const Logged = () =>{
+    return(
+        <div className='dashboard_header'>
+            <Logo classes='white' icon={'white'}/>
+            <ColorsButton label='Hazte Premium' classes='green'/>
+        </div>
+    );
+}
 
 
 /*
@@ -81,13 +90,23 @@ const {
     switchIsUserLogged
 } = props;
 
+
+
+useEffect(()=>{
+    if(localStorage.getItem('JackIsUserLogged')){
+        switchIsUserLogged(); 
+    }
+// eslint-disable-next-line
+},[]);
+
+
 return(
     <React.Fragment>
-    <Login isOpen={loginForm} onClose={switchLogin}/>
+    <Login isOpen={loginForm} onClose={switchLogin} switchIsUserLogged={switchIsUserLogged}/>
     <Signup isOpen={signupForm} onClose={switchSignup}/>
     <div className='home_navbar'>
     {isUserLogged?
-        <h1>islogged</h1>
+        <Logged/>
         :
         <NotLogged navTab={homeTab} setNavTab={switchHomeTab} loginForm={switchLogin} signupForm={switchSignup}/>    
     }

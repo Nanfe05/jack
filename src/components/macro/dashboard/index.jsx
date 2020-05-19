@@ -2,7 +2,6 @@ import React, {Fragment} from 'react';
 // Router 
 import {Switch,Route} from 'react-router-dom';
 // Layout 
-import DashboardHeader from '../../meso/layout/dbHeader/';
 import DashboardNavBar from '../..//meso/layout/dbNavbar/';
 // Components 
 // Meso 
@@ -12,7 +11,6 @@ import DbLanding from '../../meso/dashboardPages/dbLanding/';
 const Dashboard = () =>{
     return(
         <Fragment>
-                <DashboardHeader/>
                 <div className='dashboard_holder'>
                 <DashboardNavBar/>
                 <Switch>
