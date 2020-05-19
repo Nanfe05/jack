@@ -12,8 +12,11 @@ import LandingPagePreview from '../../../micro/landingpagePreview/';
 
 
 const AddLandingPage = ()=>{
+
     return(
-        <Button className='add_landing_page'>
+        <Button className='add_landing_page' onClick={()=>{
+            window.open('/editor/landingpage','_blank');
+        }}>
             <div className='add_landing_page'>
                 <AddIcon/>
             </div>
@@ -32,7 +35,6 @@ const DbLanding = () =>{
                     <LandingPagePreview/>
                     <LandingPagePreview/>
                     <LandingPagePreview/>
-                    <AddLandingPage/>
                 </div>
                 {/* <h2>Landing Pages Optin</h2>
                 <div className='landingpages_holder'></div> */}
