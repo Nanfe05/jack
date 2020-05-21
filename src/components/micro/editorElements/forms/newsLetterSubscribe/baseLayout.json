@@ -1,0 +1,24 @@
+[
+    {
+        "name":"basic_1",
+        "template":{
+            "content":{
+                "title":"Suscribirse",
+                "input_1":"Nombre :",
+                "input_2":"Email"
+            },
+            "breakpoints":[
+            {
+                "size":"small"
+
+            },
+            {
+                "size":"medium"
+            },
+            {
+                "size":"large"
+            }
+            ]
+    }
+    }
+]
