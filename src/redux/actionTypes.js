@@ -5,3 +5,8 @@ export const SWITCH_HOME_TAB = 'SWITCH_HOME_TAB';
 export const SWITCH_IS_USER_LOGGED= 'SWITCH_IS_USER_LOGGED';
 export const SWITCH_SIGNUP = 'SWITCH_SIGNUP';
 export const SWITCH_LOGIN = 'SWITCH_LOGIN';
+
+/*
+EDITOR
+*/
+export const EDITOR_ADD = 'EDITOR_ADD';

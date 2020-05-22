@@ -1,10 +1,13 @@
 import React from 'react';
 
+// Redux 
+import {connect} from 'react-redux';
+import {AddElement} from '../../../../redux/actions/editor';
 // Material UI
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-import IconButton from '@material-ui/core/IconButton';
+//import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 
 // Icons
@@ -13,26 +16,35 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import CropLandscapeIcon from '@material-ui/icons/CropLandscape';
 
-import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
-import PersonalVideoIcon from '@material-ui/icons/PersonalVideo';
-import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
+// import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
+// import PersonalVideoIcon from '@material-ui/icons/PersonalVideo';
+// import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 // Components
 // Micro 
 import ColorsButton from '../../../micro/buttons/colorsButton/';
 // Tools
 import NewsLetterSubscribe from '../../../micro/editorElements/forms/newsLetterSubscribe/';
-
-const AddElement = (element) =>{
-    // Get Canvas
-    const canvas = document.getElementById('canvas');
-    canvas.appendChild(<h1>ldkfjs</h1>);
-};
+import * as forms from '../../../micro/editorElements/forms/newsLetterSubscribe/baseLayout.json';
+// Generate IDs
+import {v4 as uuidv4} from 'uuid';
 
 
-const EditorLandingPage = () =>{
+const EditorLandingPage = (props) =>{
+    const elements = props.editor.length > 0 && props.editor.map((el,i)=>{
+        if(el.component === 'NewsLetterSubscribe'){
+            let id = el.id;
+            return <NewsLetterSubscribe key={id} id={id} contents={el.template.content}/>;
+        }
+        return <span ></span>;
+    });
+    
+
     return(<div className='editor'>
         <div className='tools'>
-            <Button className='tool' onClick={()=>{AddElement('<h1>Title</h1>')}}>
+            <Button className='tool' onClick={()=>{
+                let elements=forms[0];
+                props.AddElement(elements,uuidv4())}
+                }>
                 <AssignmentIcon/>
                 <h2>Form</h2>
             </Button>
@@ -61,7 +73,7 @@ const EditorLandingPage = () =>{
                         <MenuItem value={200}>200%</MenuItem>
                     </Select>
                  </form>
-                 <div className='breakpoints'>
+                 {/* <div className='breakpoints'>
                      <span>Break Points:</span>
                      <IconButton>
                         <PhoneIphoneIcon/>
@@ -72,10 +84,12 @@ const EditorLandingPage = () =>{
                      <IconButton>
                          <PersonalVideoIcon/>
                      </IconButton>
-                 </div>
+                 </div> */}
             </div>
             <div className='canvas_canvas'>
-                <div id='canvas' className='canvas_editor_landingPage'></div>
+                <div id='canvas' className='canvas_editor_landingPage'>
+                    {elements}
+                </div>
             </div>
             <div className='canvas_footer'>
                 <ColorsButton label='Descartar' classes='blue'/>
@@ -85,4 +99,11 @@ const EditorLandingPage = () =>{
     </div>);
 }
 
-export default EditorLandingPage;
+const mapStateToProps = state => ({
+    editor : state.editor
+});
+
+
+export default connect(mapStateToProps,{
+    AddElement
+})(EditorLandingPage);
