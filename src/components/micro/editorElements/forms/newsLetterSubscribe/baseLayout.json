@@ -9,18 +9,25 @@
                 "input_2_label":"Email :",
                 "input_submit_label":"Suscribirse !"
             },
-            "breakpoints":[
-            {
-                "size":"small"
-
-            },
-            {
-                "size":"medium"
-            },
-            {
-                "size":"large"
+            "breakpoints":{
+            "sm":{
+                
+                }
+            ,
+            "md":
+                {
+                
+                "position":"relative",
+                "top":"0px",
+                "left":"0px"
+                }
+            ,
+            "lg":
+                {
+                
+                }
+            
             }
-            ]
     }
     }
 ]

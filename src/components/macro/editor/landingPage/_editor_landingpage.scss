@@ -36,7 +36,7 @@
         flex-grow: 1;
         background-color: lightgray;
         &>.canvas_canvas{
-            display: flex;
+            
             position: relative;
             width: 90%;
             height: 80%;
@@ -45,10 +45,15 @@
             
             &>.canvas_editor_landingPage{
                 position: absolute;
-                height: 900px;
-                width: 1200px;
+                left: 5%;
+                top:5%;
+                height: 1200px;
+                width: 900px;
                 background-color: white;
-            }
+                transform-origin: 0 0;
+                    
+                }
+            
         }
         &>.canvas_header,
         &>.canvas_footer{
@@ -68,4 +73,5 @@
 }
 .bkp-button-icon{
     height: 30px;
+    
 }

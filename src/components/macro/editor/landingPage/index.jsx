@@ -2,7 +2,7 @@ import React from 'react';
 
 // Redux 
 import {connect} from 'react-redux';
-import {AddElement} from '../../../../redux/actions/editor';
+import {AddElement,EditorScale} from '../../../../redux/actions/editor';
 // Material UI
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -27,13 +27,18 @@ import NewsLetterSubscribe from '../../../micro/editorElements/forms/newsLetterS
 import * as forms from '../../../micro/editorElements/forms/newsLetterSubscribe/baseLayout.json';
 // Generate IDs
 import {v4 as uuidv4} from 'uuid';
+//Component 
+    //Micro
+
 
 
 const EditorLandingPage = (props) =>{
-    const elements = props.editor.length > 0 && props.editor.map((el,i)=>{
+    const elements = props.editor.objects.length > 0 && props.editor.objects.map((el,i)=>{
         if(el.component === 'NewsLetterSubscribe'){
             let id = el.id;
-            return <NewsLetterSubscribe key={id} id={id} contents={el.template.content}/>;
+                return <NewsLetterSubscribe key={id} id={id} contents={el.template.content}
+                // classes={props.editor.selected === id && 'selected'}
+                />;
         }
         return <span ></span>;
     });
@@ -66,11 +71,16 @@ const EditorLandingPage = (props) =>{
                  <form>
                      <InputLabel>Escala: </InputLabel>
                     <Select
-                    value={100}
+                    value={props.editor.scale}
+                    onChange={(e)=>{
+                        props.EditorScale(e.target.value);
+                    }}
                     >
-                        <MenuItem value={50}>50%</MenuItem>
-                        <MenuItem value={100}>100%</MenuItem>
-                        <MenuItem value={200}>200%</MenuItem>
+                        <MenuItem value={0.25}>25%</MenuItem>
+                        <MenuItem value={0.5}>50%</MenuItem>
+                        <MenuItem value={0.75}>75%</MenuItem>
+                        <MenuItem value={1}>100%</MenuItem>
+                        <MenuItem value={1.5}>150%</MenuItem>
                     </Select>
                  </form>
                  {/* <div className='breakpoints'>
@@ -86,10 +96,10 @@ const EditorLandingPage = (props) =>{
                      </IconButton>
                  </div> */}
             </div>
-            <div className='canvas_canvas'>
-                <div id='canvas' className='canvas_editor_landingPage'>
-                    {elements}
-                </div>
+            <div className='canvas_canvas' >
+                    <div id='canvas' className='canvas_editor_landingPage' style={{transform:`scale(${props.editor.scale},${props.editor.scale})`}}>
+                        {elements}
+                    </div>
             </div>
             <div className='canvas_footer'>
                 <ColorsButton label='Descartar' classes='blue'/>
@@ -105,5 +115,6 @@ const mapStateToProps = state => ({
 
 
 export default connect(mapStateToProps,{
-    AddElement
+    AddElement,
+    EditorScale
 })(EditorLandingPage);
