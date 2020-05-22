@@ -1,0 +1,33 @@
+[
+    {
+        "component":"NewsLetterSubscribe",
+        "name":"basic_1",
+        "template":{
+            "content":{
+                "title":"Suscribirse",
+                "input_1_label":"Nombre :",
+                "input_2_label":"Email :",
+                "input_submit_label":"Suscribirse !"
+            },
+            "breakpoints":{
+            "sm":{
+                
+                }
+            ,
+            "md":
+                {
+                
+                "position":"relative",
+                "top":"0px",
+                "left":"0px"
+                }
+            ,
+            "lg":
+                {
+                
+                }
+            
+            }
+    }
+    }
+]

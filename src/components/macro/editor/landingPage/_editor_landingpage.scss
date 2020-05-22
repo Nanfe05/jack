@@ -1,0 +1,77 @@
+.editor{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    min-height: 83vh;
+    width: 100%;
+    &>.tools{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        background-color: gray;
+        &>.tool{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 10px;
+            border-radius: 10px;
+            background-color: $blue;
+            color: white;
+            height: 100px;
+            width: 150px;
+            &>span{
+                display: initial;
+            }
+        }
+    }
+    &>.canvas{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        background-color: lightgray;
+        &>.canvas_canvas{
+            
+            position: relative;
+            width: 90%;
+            height: 80%;
+            background-color: $blue;
+            overflow: auto;
+            
+            &>.canvas_editor_landingPage{
+                position: absolute;
+                left: 5%;
+                top:5%;
+                height: 1200px;
+                width: 900px;
+                background-color: white;
+                transform-origin: 0 0;
+                    
+                }
+            
+        }
+        &>.canvas_header,
+        &>.canvas_footer{
+            display: flex;
+            flex-direction: row;
+            height: 10%;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 0 30px;
+            width: 100%;
+            &>button{
+                margin: 0px;
+            }
+        }
+    }
+}
+.bkp-button-icon{
+    height: 30px;
+    
+}

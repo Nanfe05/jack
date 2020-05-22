@@ -6,9 +6,8 @@ import TextField from '@material-ui/core/TextField';
 // Components
 import {Link} from 'react-router-dom';
 // Micro 
-import BlueButton from '../../micro/buttons/blue/';
-import FbButton from '../../micro/buttons/facebook/';
-import GButton from '../../micro/buttons/google/';
+import ColorsButton from '../../micro/buttons/colorsButton/';
+import SocialMediaButton from '../../micro/buttons/socialMediaButton';
 
 const Login = (props) =>{
     return(<Modal open={props.isOpen} onClose={props.onClose} className='modal_login'>
@@ -17,13 +16,17 @@ const Login = (props) =>{
              <form>
                 <TextField label='Email' className='login_form'/>
                 <TextField label='Contraseña' type='password' className='login_form'/>
-                <Link to='/dashboard'>
-                    <BlueButton classes='wide' label='Inicio'/>
+                <Link to='/dashboard' onClick={()=>{
+                    props.onClose();
+                    props.switchIsUserLogged();
+                    localStorage.setItem('JackIsUserLogged',true);
+                }}>
+                    <ColorsButton label='Inicio' classes='blue wide'/>
                 </Link>
              </form>
              <h3><span>Tambien puedes :</span></h3>
-             <FbButton label={'Iniciar sesion con Facebook'}/>
-             <GButton label={'Iniciar sesion con Google'} />
+             <SocialMediaButton label={'Iniciar sesion con Facebook'} type='facebook'/>
+             <SocialMediaButton label={'Iniciar sesion con Google'} type='google'/>
         </Paper>
     </Modal>);
 }

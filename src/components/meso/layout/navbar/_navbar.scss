@@ -1,7 +1,8 @@
 .home_navbar{
-    height: 93vh;
+    min-height: 10vh;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     .MuiPaper-root{
         box-shadow: none;
         justify-content: center;
@@ -32,27 +33,15 @@
     .PrivateTabIndicator-colorSecondary-67{
         background-color: $blue;
     }
-    >.swipeable_holder{
-      flex-grow: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      &>div{
-          height: 100%;
-          width: 100%;
-          &>div{
-            height: 100%;
-            width: 100%;
-            &>div{
-                height: 100%;
-                width: 100%;
-                &>div{
-                    height: 100%;
-                    width: 100%;
-                  }  
-              }  
-          }        
-        }
-    }
+   
     
+}
+.dashboard_header{
+    background-color: $blue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    height: 10vh;
 }

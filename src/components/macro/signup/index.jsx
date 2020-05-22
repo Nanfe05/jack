@@ -5,9 +5,8 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 // Components
 // Micro 
-import GreenButton from '../../micro/buttons/green/';
-import FbButton from '../../micro/buttons/facebook/';
-import GButton from '../../micro/buttons/google/';
+import ColorsButton from '../../micro/buttons/colorsButton/';
+import SocialMediaButton from '../../micro/buttons/socialMediaButton';
 
 
 const Signup = (props) =>{
@@ -19,11 +18,11 @@ const Signup = (props) =>{
                 <TextField label='Apellidos' className='login_form'/>
                 <TextField label='Email' className='login_form'/>
                 <TextField label='Contraseña' type='password' className='login_form'/>
-                <GreenButton classes='wide' label='Registro'/>
+                <ColorsButton label='Registro' classes='green wide'/>
              </form>
              <h3><span>Tambien puedes :</span></h3>
-             <FbButton label={'Registrarte con Facebook'}/>
-             <GButton label={'Registrarte con Google'} />
+             <SocialMediaButton label={'Iniciar sesion con Facebook'} type='facebook'/>
+             <SocialMediaButton label={'Iniciar sesion con Google'} type='google'/>
         </Paper>
     </Modal>);
 }

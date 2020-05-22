@@ -1,0 +1,16 @@
+.newsletterForm{
+    width: min-content;
+    font-family: font_regular;
+    text-align: center;
+    &>div>form>h2{
+        font-family: font-bold;
+        color: $blue;
+        text-transform: uppercase;
+        padding: 10px 0;
+    }
+    &>div>form>button{
+        margin: 10px 0;
+        color: white;
+        background-color: $blue;
+    }
+}

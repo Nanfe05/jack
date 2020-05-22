@@ -1,0 +1,23 @@
+.dbhome_holder{
+    width: 100%;
+    padding: 20px;
+    &>h2{
+        font-family: font-bold;
+        font-size: 30px;
+        color: $blue;
+        text-align: center;
+    }
+}
+
+.dbhome_image{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &>img{
+        
+        max-width: 700px;
+        width: 80%;
+    }
+}

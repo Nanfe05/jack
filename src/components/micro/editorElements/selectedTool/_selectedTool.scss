@@ -1,0 +1,70 @@
+.selected_tool_border{
+    //border: 6px solid $blue;
+    height: calc(100% + 8px);
+    width: calc(100% + 8px);
+    background-color: $blue;
+    flex-grow: 1;
+    position: absolute;
+    top: -4px;
+    left:-4px;
+    z-index: -1;
+    cursor: move;
+}
+.selected_tool_rotate{
+    height: 20px;
+    width: 20px;
+    background-color: $blue;
+    border-radius: 50%;
+    position: absolute;
+    cursor: grabbing;
+    // &::after{
+    //     content: '';
+    //     height: 15px;
+    //     width: 2px;
+    //     background-color: $blue;
+    //     position: absolute;
+    //     left: calc(50%-2px);
+    //     top: 50%;
+    // }
+    
+}
+$scale-r:15px;
+$scale-p:-12PX;
+.selected_tool_scale{
+    height: $scale-r;
+    width: $scale-r;
+    background-color: white;
+    border:1px solid $blue;
+    border-radius: 50%;
+    position: absolute;
+    
+    
+}
+.scale_1{
+    top: $scale-p;
+    left : $scale-p;
+    cursor:nwse-resize;
+}
+.scale_2{
+    top: $scale-p;
+    right: $scale-p;
+    cursor:nesw-resize;
+}
+.scale_3{
+    bottom: $scale-p;
+    left : $scale-p;
+    cursor:nesw-resize;
+}
+.scale_4{
+    bottom: $scale-p;
+    right: $scale-p;
+    cursor:nwse-resize;
+}
+.selected_tool_move{
+    left: calc(50% - 10px);
+}
+.selected_tool_rotate{
+    left: calc(50% - 10px);
+    top: -30px;
+   
+}
