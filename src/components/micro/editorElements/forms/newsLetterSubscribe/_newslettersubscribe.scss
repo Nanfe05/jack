@@ -1,26 +1,7 @@
 .newsletterForm{
     width: min-content;
-    cursor: move;
     font-family: font_regular;
     text-align: center;
-    &.selected{
-        border: 2px solid $blue;
-    }
-    &.selected::after{
-        content: "";
-        display: block;
-        background-color: $blue;
-        border-radius: 50%;
-        width: 15px;
-        height: 15px;
-        position: absolute;
-        left: -7px;
-        top:-7px;
-    }
-    
-    &:active{
-        cursor: grabbing;
-    }
     &>div>form>h2{
         font-family: font-bold;
         color: $blue;

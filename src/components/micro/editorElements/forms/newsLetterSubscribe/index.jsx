@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 
 //Redux
 import {connect} from 'react-redux';
-import {SelectedObject,EditObject} from '../../../../../redux/actions/editor';
+import {SelectedObject} from '../../../../../redux/actions/editor';
 
 
 // Components 
@@ -18,7 +18,7 @@ const NewsLetterSubscribe = (props) =>{
     const {id,contents,breakpoint,stateObjects,editorSelected} = props;
     let layout = stateObjects.filter((el)=> el.id === id)[0].template.breakpoints;
 
-    const controllers = id === editorSelected ? <SelectedTool/>: <div></div>;
+    const controllers = id === editorSelected ? <SelectedTool id={id}/>: <div></div>;
         
    
 
@@ -28,43 +28,17 @@ const NewsLetterSubscribe = (props) =>{
         style={{
             position:`${layout[breakpoint].position}`,
             left:`${layout[breakpoint].left}`,
-            top:`${layout[breakpoint].top}`
+            top:`${layout[breakpoint].top}`,
+            zIndex:`${id === editorSelected ? '100':'0'}`
         }}
         onMouseDown={(e)=>{  
-        e.preventDefault();
-
-        props.SelectedObject(id);
-
-        let posx1, posx2, posy1,posy2 = 0;
-        posx1= e.clientX;
-        posy1=e.clientY;
-
-
-        const element = document.getElementById(id);
-        
-        // element.classList.add('selected');
-        if(element.style.position !== 'absolute'){
-            element.style.position= 'absolute';
-        }
-
-        document.onmousemove=(e)=>{
-            e.preventDefault();
-            
-            posx2=posx1-e.clientX;
-            posy2=posy1-e.clientY;
-            posx1=e.clientX;
-            posy1=e.clientY;
-            element.style.top= (element.offsetTop - posy2)+'px';
-            element.style.left= (element.offsetLeft - posx2 )+'px';
-        };
-        document.onmouseup=(e)=>{
-            
-            props.EditObject('left',(element.offsetLeft )+'px','top',(element.offsetTop )+'px');
-            document.onmouseup = null;
-            document.onmousemove = null;
+        //e.preventDefault();
+        if(props.editorSelected === null || props.editorSelected !== id){
+            props.SelectedObject(id);
         }
     }}
     >
+        {controllers}
         <Paper elevation={2} style={{width:'200px'}}>
             <form>
                 <h2>{contents.title}</h2>
@@ -75,7 +49,7 @@ const NewsLetterSubscribe = (props) =>{
                 </Button>
             </form>
         </Paper>
-        {controllers}
+        
     </div>);
 }
 
@@ -86,6 +60,5 @@ const mapStateToProps = state =>({
 });
 
 export default connect(mapStateToProps,{
-    SelectedObject,
-    EditObject
+    SelectedObject
 })(NewsLetterSubscribe);

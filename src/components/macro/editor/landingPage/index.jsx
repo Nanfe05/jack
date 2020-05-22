@@ -24,7 +24,9 @@ import CropLandscapeIcon from '@material-ui/icons/CropLandscape';
 import ColorsButton from '../../../micro/buttons/colorsButton/';
 // Tools
 import NewsLetterSubscribe from '../../../micro/editorElements/forms/newsLetterSubscribe/';
+import Text01 from '../../../micro/editorElements/text/text01/';
 import * as forms from '../../../micro/editorElements/forms/newsLetterSubscribe/baseLayout.json';
+import * as texts from '../../../micro/editorElements/text/text01/baseLayout.json';
 // Generate IDs
 import {v4 as uuidv4} from 'uuid';
 //Component 
@@ -40,6 +42,10 @@ const EditorLandingPage = (props) =>{
                 // classes={props.editor.selected === id && 'selected'}
                 />;
         }
+        if(el.component === 'Text01'){
+            let id = el.id;
+            return <Text01 key={id} id={id}/>
+        }
         return <span ></span>;
     });
     
@@ -53,7 +59,10 @@ const EditorLandingPage = (props) =>{
                 <AssignmentIcon/>
                 <h2>Form</h2>
             </Button>
-            <Button className='tool'>
+            <Button className='tool' onClick={()=>{
+                let elements=texts[0];
+                props.AddElement(elements,uuidv4())}
+                }>
                 <FontDownloadIcon/>
                 <h2>Text</h2>
             </Button>
