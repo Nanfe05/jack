@@ -80,7 +80,7 @@ const ScaleObject = (e,id,EditObject) =>{
             }
             element.style.transformOrigin='0.5 0.5';
             let otherTrasform = TransformAttributes(element,'scale');
-            console.log(`scale(${scale.x},${scale.y} ${otherTrasform})`);
+            //console.log(`scale(${scale.x},${scale.y} ${otherTrasform})`);
             element.style.transform=`scale(${scale.x},${scale.y}) ${otherTrasform}`;
             //element.style.top= (element.offsetTop - posy2)+'px';
             //element.style.left= (element.offsetLeft - posx2 )+'px';
@@ -154,7 +154,7 @@ const RotateObject = (e,id,EditObject) =>{
 };
 
 const SelectedTool = (props) =>{
-    return(<Fragment>
+    return(<Fragment >
         <div className='selected_tool_border'
         onMouseDown={(e)=>MoveObject(e,props.id,props.EditObject)}
         ></div>

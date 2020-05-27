@@ -2,12 +2,12 @@ import React from 'react';
 
 // Redux 
 import {connect} from 'react-redux';
-import {AddElement,EditorScale} from '../../../../redux/actions/editor';
+import {AddElement,EditorScale,SelectedObject} from '../../../../redux/actions/editor';
 // Material UI
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
-//import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 
 // Icons
@@ -16,9 +16,9 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import CropLandscapeIcon from '@material-ui/icons/CropLandscape';
 
-// import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
-// import PersonalVideoIcon from '@material-ui/icons/PersonalVideo';
-// import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
+import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
+import PersonalVideoIcon from '@material-ui/icons/PersonalVideo';
+import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 // Components
 // Micro 
 import ColorsButton from '../../../micro/buttons/colorsButton/';
@@ -48,10 +48,9 @@ const EditorLandingPage = (props) =>{
         }
         return <span ></span>;
     });
-    
 
-    return(<div className='editor'>
-        <div className='tools'>
+    const sideBar = !props.editor.selected ?
+    <div className='tools'>
             <Button className='tool' onClick={()=>{
                 let elements=forms[0];
                 props.AddElement(elements,uuidv4())}
@@ -75,6 +74,30 @@ const EditorLandingPage = (props) =>{
                 <h2>Image</h2>
             </Button>
         </div>
+    :
+    <div className='tools modify'>
+        <h3>Edit Tools</h3>
+            <h4>Altura</h4>
+            <h4>Ancho</h4>
+            <h4>Z-Index</h4>
+            <h4>Fondo</h4>
+            <h4>Borde</h4>
+            <h4>Padding</h4>
+
+        <h3>Transform Tools</h3>
+        <h4>Rotate</h4>
+        <h4>Scale</h4>
+            <h5>X</h5>
+            <h5>Y</h5>
+        <h4>Transform</h4>
+        <h5>X</h5>
+        <h5>Y</h5>
+    </div>
+    ;
+    
+
+    return(<div className='editor'>
+        {sideBar}
         <div className='canvas'>
             <div className='canvas_header'>
                  <form>
@@ -92,7 +115,23 @@ const EditorLandingPage = (props) =>{
                         <MenuItem value={1.5}>150%</MenuItem>
                     </Select>
                  </form>
-                 {/* <div className='breakpoints'>
+               
+            </div>
+            <div id='canvas_holder' className='canvas_canvas' onMouseDown={(e)=>{
+                // DESELECT OBJECT IF CLICK ON CANVAS
+                if(e.target.id === 'canvas' || e.target.id === 'canvas_holder'){
+                    if(props.editor.selected){
+                        props.SelectedObject(null);
+                    }
+                }
+            }}>
+                    <div id='canvas' className='canvas_editor_landingPage' style={{transform:`scale(${props.editor.scale},${props.editor.scale})`}}>
+                        {elements}
+                    </div>
+            </div>
+            <div className='canvas_footer'>
+                <ColorsButton label='Descartar' classes='blue'/>
+                  <div className='breakpoints'>
                      <span>Break Points:</span>
                      <IconButton>
                         <PhoneIphoneIcon/>
@@ -103,15 +142,7 @@ const EditorLandingPage = (props) =>{
                      <IconButton>
                          <PersonalVideoIcon/>
                      </IconButton>
-                 </div> */}
-            </div>
-            <div className='canvas_canvas' >
-                    <div id='canvas' className='canvas_editor_landingPage' style={{transform:`scale(${props.editor.scale},${props.editor.scale})`}}>
-                        {elements}
-                    </div>
-            </div>
-            <div className='canvas_footer'>
-                <ColorsButton label='Descartar' classes='blue'/>
+                 </div>
                 <ColorsButton label='Guardar' classes='green'/>
             </div>
         </div>
@@ -125,5 +156,6 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps,{
     AddElement,
-    EditorScale
+    EditorScale,
+    SelectedObject
 })(EditorLandingPage);

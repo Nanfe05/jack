@@ -10,8 +10,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 200px;
+        width: 180px;
         background-color: gray;
+        &.modify{
+            width: 350px;
+        }
         &>.tool{
             display: flex;
             flex-direction: column;
@@ -42,6 +45,7 @@
             height: 80%;
             background-color: $blue;
             overflow: auto;
+           
             
             &>.canvas_editor_landingPage{
                 position: absolute;
@@ -51,7 +55,7 @@
                 width: 900px;
                 background-color: white;
                 transform-origin: 0 0;
-                    
+                
                 }
             
         }
@@ -67,6 +71,23 @@
             width: 100%;
             &>button{
                 margin: 0px;
+            }
+            &>.breakpoints{
+                background-color: white;
+                border-radius: 10px;
+                padding: 0 5px;
+                font-family: font_regular;
+                color: $blue;
+                &>button{
+                    padding: 6px;
+                    margin: 2px;
+                    &>span{
+                        &>svg{
+                            width: 20px;
+                            height: 20px;
+                        }
+                    }
+                }
             }
         }
     }
