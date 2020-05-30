@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 // Redux 
 import {connect} from 'react-redux';
-import {switchHomeTab,switchLogin,switchSignup,switchIsUserLogged} from '../../../../redux/actions/uiGeneral';
+import {switchHomeTab,switchLogin,switchSignup} from '../../../../redux/actions/uiGeneral';
 // React Router
 //import {useHistory} from 'react-router-dom';
 // Material UI
@@ -86,23 +86,16 @@ const {
 const {
     switchHomeTab,
     switchLogin,
-    switchSignup,
-    switchIsUserLogged
+    switchSignup
 } = props;
 
 
 
-useEffect(()=>{
-    if(localStorage.getItem('JackIsUserLogged')){
-        switchIsUserLogged(); 
-    }
-// eslint-disable-next-line
-},[]);
 
 
 return(
     <React.Fragment>
-    <Login isOpen={loginForm} onClose={switchLogin} switchIsUserLogged={switchIsUserLogged}/>
+    <Login isOpen={loginForm} onClose={switchLogin}/>
     <Signup isOpen={signupForm} onClose={switchSignup}/>
     <div className='home_navbar'>
     {isUserLogged?
@@ -131,5 +124,4 @@ export default connect(mapStateToProps,{
     switchHomeTab,
     switchLogin,
     switchSignup,
-    switchIsUserLogged
 })(NavBar);

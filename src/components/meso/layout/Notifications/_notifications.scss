@@ -1,0 +1,18 @@
+.alert_msg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize;
+    min-height: 30px;
+    margin: 20px;
+    min-width: 300px;
+    color: white;
+    border-radius: 10px;
+    font-family: font_regular;
+    &.error{
+        background-color: rgb(253, 86, 86);
+    }
+    &.success{
+        background-color: rgb(37, 192, 37);
+    }
+}

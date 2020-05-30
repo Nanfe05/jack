@@ -11,6 +11,8 @@ import EditorLandingPage from './components/macro/editor/landingPage/';
 // Layout 
 import Footer from './components/meso/layout/footer/';
 import NavBar from './components/meso/layout/navbar/';
+import Loading from './components/meso/layout/Loading/';
+import Notifications from './components/meso/layout/Notifications/';
 // Styles
 import './components/contents/_styles.scss';
 
@@ -19,6 +21,8 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <BrowserRouter>
+          <Loading/>
+          <Notifications/>
           <NavBar/>
           <Switch>
             <Route path='/dashboard'>

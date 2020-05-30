@@ -13,6 +13,26 @@ export const switchSignup = () =>({
     type: actionType.SWITCH_SIGNUP
 })
 
-export const switchIsUserLogged = () =>({
-    type: actionType.SWITCH_IS_USER_LOGGED
-})
+/*
+Loading
+*/
+export const SwitchLoading = () =>({
+    type: actionType.SWITCH_LOADING
+});
+/*
+Notifications
+*/
+export const SetErrorsMsg = (payload) => ({
+    type: actionType.SET_ERRORS_MSG,
+    payload:payload
+});
+export const ClearErrorsMsg = () => ({
+    type: actionType.CLEAR_ERROS_MSG
+});
+export const SetSuccessMsg = (payload) => ({
+    type: actionType.SET_SUCCESS_MSG,
+    payload:payload
+});
+export const ClearSuccessMsg = () => ({
+    type: actionType.CLEAR_SUCCESS_MSG
+});
