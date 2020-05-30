@@ -18,7 +18,7 @@ const SocialMediaButton = (props) =>{
         type= noSM;
     }
 
-return(<Button className='button_mult_signup'>{type}{props.label}</Button>);
+return(<Button className='button_mult_signup' onClick={props.action}>{type}{props.label}</Button>);
 }
 
 export default SocialMediaButton;

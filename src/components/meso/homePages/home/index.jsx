@@ -4,8 +4,11 @@ import Grid from '@material-ui/core/Grid';
 // Components
 // Micro 
 import SocialMediaButton from '../../../micro/buttons/socialMediaButton';
+// Redux
+import {connect} from 'react-redux';
+import {switchSignup} from '../../../../redux/actions/uiGeneral';
 
-const HpHome = () =>{
+const HpHome = (props) =>{
 
     return(
         <div className='hp_home'>
@@ -17,7 +20,7 @@ const HpHome = () =>{
                     <h4>Registrate, es gratis.</h4>
                     <SocialMediaButton label={'Registrate con Facebook'} type='facebook'/>
                     <SocialMediaButton label={'Registrate con Google'} type='google'/>
-                    <SocialMediaButton label={'Registrate con email'}/>
+                    <SocialMediaButton label={'Registrate con email'} action={props.switchSignup}/>
                     </Grid>
                 </Grid>
                 <Grid item md={8} className='holders'>
@@ -28,4 +31,4 @@ const HpHome = () =>{
     );
 };
 
-export default HpHome;
+export default connect(null,{switchSignup})(HpHome);
