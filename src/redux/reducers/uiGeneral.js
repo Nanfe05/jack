@@ -8,11 +8,40 @@ const initialState = {
         errors:[],
         success:[]
     },
-    isLoading:false
+    isLoading:false,
+    user:{
+        logged:false,
+        name:'',
+        needValidation:false
+    }
 }
 
 export default function(state= initialState, action){
     switch(action.type){
+        case actionType.USER_NEED_VALIDATION:
+            return{
+                ...state,
+                user:{
+                    ...state.user,
+                    needValidation: !state.user.needValidation
+                }
+            }
+        case actionType.USER_NAME:
+            return{
+                ...state,
+                user:{
+                    ...state.user,
+                    name:action.payload
+                }
+            }
+        case actionType.USER_IS_LOGGED:
+            return{
+                ...state,
+                user:{
+                    ...state.user,
+                    logged: !state.user.logged
+                }
+            }
         case actionType.CLEAR_SUCCESS_MSG:
             return{
                 ...state,

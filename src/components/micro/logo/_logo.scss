@@ -7,6 +7,9 @@
     margin-left: 30px;
     font-family: logo;
     width: auto;
+    &:hover{
+        cursor: pointer;
+    }
     img{
         width: 45px;
     }

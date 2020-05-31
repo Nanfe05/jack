@@ -9,14 +9,14 @@ import SocialMediaButton from '../../micro/buttons/socialMediaButton';
 // Redux 
 import {connect} from 'react-redux';
 import {LogInFormChange,LogInFormClear} from '../../../redux/actions/form';
-import {SwitchLoading,SetErrorsMsg,SetSuccessMsg} from '../../../redux/actions/uiGeneral';
+import {SwitchLoading,SetErrorsMsg,SetSuccessMsg,UserNeedValidation} from '../../../redux/actions/uiGeneral';
 // Server Communication
 import axios from 'axios';
 
 const timeout = 1000;
 
 
-const OnFormSubmit = async (payload,Loading,ErrorMsgs,SuccessMsgs,ClearForm) =>{
+const OnFormSubmit = async (payload,Loading,ErrorMsgs,SuccessMsgs,ClearForm,ToValidate) =>{
     Loading();
     try{
         const token = await axios.post('/jackmarketing/auth/login',payload,{
@@ -33,6 +33,8 @@ const OnFormSubmit = async (payload,Loading,ErrorMsgs,SuccessMsgs,ClearForm) =>{
                 }
                 // Set Token in LocalStorage 
                     localStorage.setItem('x-jackMarketing-token',token.data.token);
+                // Need to validate
+                    ToValidate();
                 // Clear Form
                     ClearForm();
             },timeout)
@@ -61,7 +63,8 @@ const Login = (props) =>{
         LogInFormClear,
         SetErrorsMsg,
         SetSuccessMsg,
-        SwitchLoading
+        SwitchLoading,
+        UserNeedValidation
     } = props;
 
     return(<Modal open={props.isOpen} onClose={props.onClose} className='modal_login'>
@@ -76,7 +79,7 @@ const Login = (props) =>{
                 }}/>
                 
                 <ColorsButton label='Inicio' classes='blue wide' action={()=>{
-                    OnFormSubmit(form,SwitchLoading,SetErrorsMsg,SetSuccessMsg,LogInFormClear);
+                    OnFormSubmit(form,SwitchLoading,SetErrorsMsg,SetSuccessMsg,LogInFormClear,UserNeedValidation);
                 }}/>
                 
              </form>
@@ -96,5 +99,6 @@ export default connect(mapStateToProps,{
     LogInFormClear,
     SwitchLoading,
     SetErrorsMsg,
-    SetSuccessMsg
+    SetSuccessMsg,
+    UserNeedValidation
 })(Login);

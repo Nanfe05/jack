@@ -36,3 +36,16 @@ export const SetSuccessMsg = (payload) => ({
 export const ClearSuccessMsg = () => ({
     type: actionType.CLEAR_SUCCESS_MSG
 });
+/*
+User
+*/
+export const SwitchUserIsLogged = () =>({
+    type: actionType.USER_IS_LOGGED
+});
+export const SetUserName = (payload) =>({
+    type: actionType.USER_NAME,
+    payload:payload
+});
+export const UserNeedValidation = () =>({
+    type: actionType.USER_NEED_VALIDATION
+});

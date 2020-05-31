@@ -4,6 +4,9 @@ import {Provider} from 'react-redux';
 import store from './redux/store';
 // Router 
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
+// Private Routes - Middleware
+import PrivateRoute from './components/shared/privateRoute/';
+import PublicRoute from './components/shared/publicRoute/';
 // Components
 import Home from './components/macro/home';
 import Dashboard from './components/macro/dashboard';
@@ -25,15 +28,15 @@ function App() {
           <Notifications/>
           <NavBar/>
           <Switch>
-            <Route path='/dashboard'>
-              <Dashboard />
-            </Route>
-            <Route exact path='/editor/landingpage'>
+            <PrivateRoute path='/dashboard' component={Dashboard}/>
+            <Route path='/editor/landingpage'>
               <EditorLandingPage/>
             </Route>
-            <Route path='/'>
+            {/* <PrivateRoute path='/editor/landingpage' component={EditorLandingPage}/> */}
+            <PublicRoute path='/' component={Home}/>
+            {/* <Route path='/'>
               <Home/>
-            </Route>
+            </Route> */}
           </Switch>
           <Footer/>
         </BrowserRouter>

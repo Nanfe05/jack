@@ -10,14 +10,14 @@ import SocialMediaButton from '../../micro/buttons/socialMediaButton';
 // Redux
 import {connect} from 'react-redux';
 import {SignInFormChange,SignInFormClear} from '../../../redux/actions/form';
-import {SwitchLoading,SetErrorsMsg,SetSuccessMsg} from '../../../redux/actions/uiGeneral';
+import {SwitchLoading,SetErrorsMsg,SetSuccessMsg,UserNeedValidation} from '../../../redux/actions/uiGeneral';
 // Server Communication
 import axios from 'axios';
 
 const timeout = 1000;
 
 
-const OnFormSubmit = async (payload,Loading,ErrorMsgs,SuccessMsgs,ClearForm) =>{
+const OnFormSubmit = async (payload,Loading,ErrorMsgs,SuccessMsgs,ClearForm,ToValidate) =>{
     Loading();
     try{
         const token = await axios.post('/jackmarketing/auth/signin',payload,{
@@ -34,6 +34,8 @@ const OnFormSubmit = async (payload,Loading,ErrorMsgs,SuccessMsgs,ClearForm) =>{
                 }
                 // Set Token in LocalStorage 
                     localStorage.setItem('x-jackMarketing-token',token.data.token);
+                // Need to validate
+                ToValidate();
                 // Clear Form
                     ClearForm();
             },timeout)
@@ -61,7 +63,8 @@ const Signup = (props) =>{
         SignInFormClear,
         SetErrorsMsg,
         SetSuccessMsg,
-        SwitchLoading
+        SwitchLoading,
+        UserNeedValidation
     } = props;
 
     return(<Modal open={props.isOpen} onClose={props.onClose} className='modal_signup'>
@@ -81,7 +84,7 @@ const Signup = (props) =>{
                     SignInFormChange({pass:e.target.value});
                 }}/>
                 <ColorsButton label='Registro' classes='green wide' action={()=>{
-                    OnFormSubmit(form,SwitchLoading,SetErrorsMsg,SetSuccessMsg,SignInFormClear);
+                    OnFormSubmit(form,SwitchLoading,SetErrorsMsg,SetSuccessMsg,SignInFormClear,UserNeedValidation);
                 }}/>
              </form>
              <h3><span>Tambien puedes :</span></h3>
@@ -100,5 +103,6 @@ export default connect(mapStateToProps,{
     SignInFormClear,
     SwitchLoading,
     SetErrorsMsg,
-    SetSuccessMsg
+    SetSuccessMsg,
+    UserNeedValidation
 })(Signup);

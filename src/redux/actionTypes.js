@@ -6,6 +6,12 @@ export const SWITCH_SIGNUP = 'SWITCH_SIGNUP';
 export const SWITCH_LOGIN = 'SWITCH_LOGIN';
 
 /*
+USER
+*/
+export const USER_IS_LOGGED = 'USER_IS_LOGGED';
+export const USER_NAME = 'USER_NAME';
+export const USER_NEED_VALIDATION = 'USER_NEED_VALIDATION';
+/*
 EDITOR
 */
 export const EDITOR_SCALE= 'EDITOR_SCALE';

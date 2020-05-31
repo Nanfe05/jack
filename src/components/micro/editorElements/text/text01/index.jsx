@@ -9,7 +9,7 @@ import {SelectedObject} from '../../../../../redux/actions/editor';
 
 
 const Text01 = (props) =>{
-    const {id,contents,breakpoint,stateObjects,editorSelected} = props;
+    const {id,breakpoint,stateObjects,editorSelected} = props;
     let objects = stateObjects.filter((el)=> el.id === id)[0];
     let layout = stateObjects.filter((el)=> el.id === id)[0].template.breakpoints;
 

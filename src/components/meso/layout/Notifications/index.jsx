@@ -40,7 +40,7 @@ const Notifications = ({
         <Snackbar 
         open={isOpen} 
         anchorOrigin={{vertical: 'top', horizontal: 'center'}}
-        autoHideDuration={4000}
+        autoHideDuration={1500}
         onClose={()=>{
             ClearErrorsMsg();
             ClearSuccessMsg();
