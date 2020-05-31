@@ -3,10 +3,11 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import store from './redux/store';
 // Router 
-import {BrowserRouter,Switch,Route} from 'react-router-dom';
+import {BrowserRouter,Switch} from 'react-router-dom';
 // Private Routes - Middleware
 import PrivateRoute from './components/shared/privateRoute/';
 import PublicRoute from './components/shared/publicRoute/';
+import Validate from './components/shared/validation/';
 // Components
 import Home from './components/macro/home';
 import Dashboard from './components/macro/dashboard';
@@ -24,21 +25,17 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <BrowserRouter>
-          <Loading/>
           <Notifications/>
-          <NavBar/>
-          <Switch>
-            <PrivateRoute path='/dashboard' component={Dashboard}/>
-            <Route path='/editor/landingpage'>
-              <EditorLandingPage/>
-            </Route>
-            {/* <PrivateRoute path='/editor/landingpage' component={EditorLandingPage}/> */}
-            <PublicRoute path='/' component={Home}/>
-            {/* <Route path='/'>
-              <Home/>
-            </Route> */}
-          </Switch>
-          <Footer/>
+          <Loading/>
+          <Validate>
+            <NavBar/>
+            <Switch>
+              <PrivateRoute path='/dashboard' component={Dashboard}/>
+              <PrivateRoute path='/editor/landingpage' component={EditorLandingPage}/> 
+              <PublicRoute path='/' component={Home}/>
+            </Switch>
+            <Footer/>
+          </Validate>
         </BrowserRouter>
       </Provider>
     </div>

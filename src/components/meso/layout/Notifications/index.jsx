@@ -45,6 +45,7 @@ const Notifications = ({
             ClearErrorsMsg();
             ClearSuccessMsg();
         }}
+        style={{zIndex:'2001'}}
         >
             <div>
                 {errors}
