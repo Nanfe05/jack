@@ -9,17 +9,30 @@
                 "input_2_label":"Email :",
                 "input_submit_label":"Suscribirse !"
             },
-            "breakpoints":{
+            "layout":{
             "sm":{
                 
                 }
             ,
             "md":
                 {
-                
-                "position":"relative",
-                "top":"0px",
-                "left":"0px"
+                "height":190,
+                "width":200,
+                "border":"none",
+                "border_width":1,
+                "border_color":"#000000",
+                "background":"color",
+                "b_gradient_style":"linear",
+                "background_color_1":"rgba(255, 255, 255, 1)",
+                "background_color_2":"rgba(255, 255, 255, 1)",
+                "padding":0,
+                "position":"absolute",
+                "position_left":0,
+                "position_top":0,
+                "rotation":0,
+                "scale_x":1,
+                "scale_y":1,
+                "z_index":10
                 }
             ,
             "lg":

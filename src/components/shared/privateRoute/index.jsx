@@ -7,8 +7,6 @@ import {connect} from 'react-redux';
 const PrivateRoute = ({component:Component,...rest})=>(
     <Route {...rest}
     render={()=>{
-        console.log(rest.loading);
-            console.log(window.location.pathname);
             if(!rest.loading){
                 if(rest.user && rest.user.logged){
                     return <Component />;

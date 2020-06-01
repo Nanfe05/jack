@@ -1,3 +1,30 @@
+.edit_tool{
+    &.MuiFormControl-root{
+        width: 80px;
+        margin: 5px 0;
+    }
+    &>label{
+        background-color: white;
+        border-radius: 3px;
+        padding: 2px;
+        &.MuiInputLabel-outlined{
+            transform: translate(14px,10px) scale(1);
+        }
+        &.MuiInputLabel-outlined.MuiInputLabel-shrink{
+            transform: translate(14px,-6px) scale(0.75);
+        }
+        
+    }
+    &>div.MuiInputBase-root{
+        background-color: white;
+        height: 35px;
+        &>.MuiInputBase-input{
+            height: 20px;
+        }
+    }
+
+}
+
 .editor{
     display: flex;
     flex-direction: row;
@@ -5,15 +32,62 @@
     align-items: stretch;
     min-height: 83vh;
     width: 100%;
+
     &>.tools{
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 180px;
-        background-color: gray;
+        background-color: $green;
+        // background-image: linear-gradient($green,$green-2);
+        /*
+            Modify Tools
+        */
         &.modify{
             width: 350px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: white;
+            background-image: none;
+            &>h3{
+                font-family: font-bold;
+                font-size: 18px;
+                margin: 15px 0;
+                color: $blue;
+            }
+            .col{
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                justify-content: center;
+                align-items: center;
+            }
+            .row{
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                width: 100%;
+                justify-content: space-evenly;
+                align-items: center;
+                &>h5{
+                    font-family: font_regular;
+                    font-size: 16px;
+                    margin: 8px 0;
+                    color: $blue;
+                }
+            }
+            .row,
+            .col{
+                &>h4{
+                    font-family: font_regular;
+                    font-size: 16px;
+                    margin: 8px 0;
+                    width: 100%;
+                    text-align: left;
+                    color: $blue;
+                }
+            }
         }
         &>.tool{
             display: flex;
@@ -22,8 +96,8 @@
             justify-content: center;
             margin: 10px;
             border-radius: 10px;
-            background-color: $blue;
-            color: white;
+            background-color: white;
+            color: $green;
             height: 100px;
             width: 150px;
             &>span{

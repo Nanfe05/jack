@@ -4,18 +4,27 @@
     //border: 6px solid $blue;
     height: calc(100% + 8px);
     width: calc(100% + 8px);
-    background-color: $blue;
+    background-color: $green-2;
     flex-grow: 1;
     position: absolute;
     top: -4px;
     left:-4px;
     z-index: -1;
     cursor: move;
+    &::after{
+        content: '';
+        height: calc(100% - 8px);
+        width: calc(100% - 8px);
+        background-color: white;
+        position: absolute;
+        top: 4px;
+        left:4px;
+    }
 }
 .selected_tool_rotate{
     height: 20px;
     width: 20px;
-    background-color: $blue;
+    background-color: $green-2;
     border-radius: 50%;
     position: absolute;
     cursor: grabbing;

@@ -79,7 +79,10 @@ const ValidateToken = async (
             }
             // Delete Token 
             localStorage.removeItem('x-jackMarketing-token');
+            SetFirstLoad(false);
         }
+     }else{
+        SetFirstLoad(false);
      }
 };
 

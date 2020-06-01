@@ -18,19 +18,19 @@ export default function(state = myInitialState, action){
                     
                     if(el.id === state.selected){  
                     
-                        if(el.template.breakpoints[state.breakpoint].position !== 'absolute'){
-                            el.template.breakpoints[state.breakpoint].position = 'absolute';
+                        if(el.template.layout[state.breakpoint].position !== 'absolute'){
+                            el.template.layout[state.breakpoint].position = 'absolute';
                         }
                         const temp = {
                             ...el,
                             template:{
                                 ...el.template,
-                                breakpoints:{
-                                    ...el.template.breakpoints,
+                                layout:{
+                                    ...el.template.layout,
                                     [state.breakpoint]:{
-                                        ...el.template.breakpoints[state.breakpoint],
-                                        [action.atribute]:action.payload,
-                                        [action.atribute2]:action.payload2
+                                        ...el.template.layout[state.breakpoint],
+                                        [action.atribute]:action.payload, // TODO REVIEW
+                                        [action.atribute2]:action.payload2 // TODO REVIEW
                                     }
                                 }
                             }
