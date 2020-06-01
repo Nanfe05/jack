@@ -4,6 +4,7 @@ import * as actionType from '../actionTypes';
 
 const myInitialState = {
     selected:null,
+    topBar:null,
     scale:1,
     breakpoint:'md',
     objects:[]
@@ -60,6 +61,11 @@ export default function(state = myInitialState, action){
                 ...state,
                 selected:action.payload
             }
+            case actionType.CHANGE_TOPBAR:
+                return{
+                    ...state,
+                    topBar:action.payload
+                }
         default:
             return state;
     }

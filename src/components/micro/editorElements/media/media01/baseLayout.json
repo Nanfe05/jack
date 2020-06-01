@@ -1,14 +1,9 @@
 [
     {
-        "component":"NewsLetterSubscribe",
+        "component":"Media01",
         "name":"basic_1",
         "template":{
-            "content":{
-                "title":"Suscribirse",
-                "input_1_label":"Nombre :",
-                "input_2_label":"Email :",
-                "input_submit_label":"Suscribirse !"
-            },
+            "content":{},
             "layout":{
             "sm":{
                 
@@ -16,15 +11,15 @@
             ,
             "md":
                 {
-                "height":190,
+                "height":200,
                 "width":200,
                 "border":"none",
                 "border_width":1,
                 "border_color":"#000000",
                 "background":"color",
                 "b_gradient_style":"linear",
-                "background_color_1":"#FFFFFF",
-                "background_color_2":"#FFFFFF",
+                "background_color_1":"#333366",
+                "background_color_2":"#339933",
                 "padding":0,
                 "position":"absolute",
                 "position_left":0,
@@ -32,7 +27,9 @@
                 "rotation":0,
                 "scale_x":1,
                 "scale_y":1,
-                "z_index":10
+                "z_index":10,
+                "url":"/assets/jpgs/nopng.png",
+                "image_name":"no_image"
                 }
             ,
             "lg":

@@ -27,3 +27,8 @@ export const EditObject = (atribute,payload,atribute2=undefined,payload2=undefin
     atribute2:atribute2,
     payload2:payload2
 });
+
+export const ChangeTopBar = (payload) =>({
+    type:actionType.CHANGE_TOPBAR,
+    payload:payload
+});

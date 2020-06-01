@@ -143,6 +143,29 @@
             box-sizing: border-box;
             padding: 0 30px;
             width: 100%;
+            font-family: font_regular;
+
+            &>.topbar_row{
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                width: 70%;
+                border-radius: 5PX;
+                &>.MuiFormControl-root.MuiTextField-root{
+                    width: 40%;
+                    padding: 0 5%;
+                    flex-grow: 1;
+                }
+            }
+            .topbar_col{
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+            }
+
+
+
             &>button{
                 margin: 0px;
             }

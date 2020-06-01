@@ -1,14 +1,9 @@
 [
     {
-        "component":"NewsLetterSubscribe",
+        "component":"Box01",
         "name":"basic_1",
         "template":{
-            "content":{
-                "title":"Suscribirse",
-                "input_1_label":"Nombre :",
-                "input_2_label":"Email :",
-                "input_submit_label":"Suscribirse !"
-            },
+            "content":{},
             "layout":{
             "sm":{
                 
@@ -21,10 +16,10 @@
                 "border":"none",
                 "border_width":1,
                 "border_color":"#000000",
-                "background":"color",
+                "background":"gradient",
                 "b_gradient_style":"linear",
-                "background_color_1":"#FFFFFF",
-                "background_color_2":"#FFFFFF",
+                "background_color_1":"#333366",
+                "background_color_2":"#339933",
                 "padding":0,
                 "position":"absolute",
                 "position_left":0,

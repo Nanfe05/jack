@@ -71,7 +71,7 @@ const ResizeObject = (e,id,EditObject) =>{
 
         };
         document.onmouseup=(e)=>{
-        EditObject('height',size.x,'width',size.y);
+        EditObject('height',size.y,'width',size.x);
         document.onmouseup = null;
         document.onmousemove = null;
         }

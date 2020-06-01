@@ -2,15 +2,15 @@ import React from 'react';
 
 //Redux
 import {connect} from 'react-redux';
-import {SelectedObject} from '../../../../../redux/actions/editor';
+import {SelectedObject,ChangeTopBar} from '../../../../../redux/actions/editor';
 // Components 
     // Micro 
     import SelectedTool from '../../../../micro/editorElements/selectedTool/';
 // Special Functions
 import {DynamicStyles} from '../../functions';
 
-const Text01 = (props) =>{
-    const {id,contents,layout,breakpoint,editorSelected} = props;
+const Media01 = (props) =>{
+    const {id,layout,breakpoint,editorSelected} = props;
 
     const controllers = id === editorSelected ? <SelectedTool id={id}/>: <div></div>;
     return(
@@ -22,18 +22,16 @@ const Text01 = (props) =>{
                 //e.preventDefault();
                 if(props.editorSelected === null || props.editorSelected !== id){
                     props.SelectedObject(id);
+                    props.ChangeTopBar('img');
                 }
             }}
         >
             {controllers}
-            <div 
-            // contentEditable={true}
-            onInput={(e)=>{
-                console.log(e.target.innerText);
-            }}
-            >
-                {contents.text}
-            </div>
+            <img 
+                src={layout.md.url}
+                alt={layout.md.image_name}
+                style={{width:'100%',height:'100%',backgroundSize:'cover',backgroundRepeat:' no-repeat'}}
+            />
         </div>
     )
 }
@@ -45,5 +43,6 @@ const mapStateToProps = state =>({
 });
 
 export default connect(mapStateToProps,{
-    SelectedObject
-})(Text01);
+    SelectedObject,
+    ChangeTopBar
+})(Media01);

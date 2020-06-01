@@ -9,8 +9,8 @@ import {SelectedObject} from '../../../../../redux/actions/editor';
 // Special Functions
 import {DynamicStyles} from '../../functions';
 
-const Text01 = (props) =>{
-    const {id,contents,layout,breakpoint,editorSelected} = props;
+const Box01 = (props) =>{
+    const {id,layout,breakpoint,editorSelected} = props;
 
     const controllers = id === editorSelected ? <SelectedTool id={id}/>: <div></div>;
     return(
@@ -26,13 +26,8 @@ const Text01 = (props) =>{
             }}
         >
             {controllers}
-            <div 
-            // contentEditable={true}
-            onInput={(e)=>{
-                console.log(e.target.innerText);
-            }}
-            >
-                {contents.text}
+            <div>
+                {}
             </div>
         </div>
     )
@@ -46,4 +41,4 @@ const mapStateToProps = state =>({
 
 export default connect(mapStateToProps,{
     SelectedObject
-})(Text01);
+})(Box01);
