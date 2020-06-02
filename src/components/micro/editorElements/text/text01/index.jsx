@@ -2,7 +2,7 @@ import React from 'react';
 
 //Redux
 import {connect} from 'react-redux';
-import {SelectedObject} from '../../../../../redux/actions/editor';
+import {SelectedObject,ChangeTopBar} from '../../../../../redux/actions/editor';
 // Components 
     // Micro 
     import SelectedTool from '../../../../micro/editorElements/selectedTool/';
@@ -22,12 +22,13 @@ const Text01 = (props) =>{
                 //e.preventDefault();
                 if(props.editorSelected === null || props.editorSelected !== id){
                     props.SelectedObject(id);
+                    props.ChangeTopBar('txt');
                 }
             }}
         >
             {controllers}
             <div 
-            // contentEditable={true}
+            contentEditable={true}
             onInput={(e)=>{
                 console.log(e.target.innerText);
             }}
@@ -45,5 +46,6 @@ const mapStateToProps = state =>({
 });
 
 export default connect(mapStateToProps,{
-    SelectedObject
+    SelectedObject,
+    ChangeTopBar
 })(Text01);

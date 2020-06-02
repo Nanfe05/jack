@@ -23,6 +23,7 @@ import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
 // Micro 
 import ColorsButton from '../../../micro/buttons/colorsButton/';
 // Tools
+import TextEditorTools from './texteditor/';
 import ModificationToolBar from './modificationToolbar/';
 import NewsLetterSubscribe from '../../../micro/editorElements/forms/newsLetterSubscribe/';
 import Text01 from '../../../micro/editorElements/text/text01/';
@@ -137,6 +138,9 @@ const EditorLandingPage = (props) =>{
             />
     </div>
     :
+    props.editor.topBar === 'txt'?
+    <TextEditorTools/>
+    :
     <div></div>
     ;
 
@@ -146,7 +150,7 @@ const EditorLandingPage = (props) =>{
         {sideBar}
         <div className='canvas'>
             <div className='canvas_header'>
-                 <form>
+                 <form className='scale_editor'>
                      <InputLabel>Escala: </InputLabel>
                     <Select
                     value={props.editor.scale}

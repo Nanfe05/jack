@@ -1,0 +1,55 @@
+.text_editor_toolbar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+
+    &>.tet{
+        margin: 0 10px;
+        &>label{
+            font-size: 14px;
+            color: $blue;
+            font-family: font-bold;
+        }
+        &>div{
+            color: $blue;
+        }
+    }
+
+    &>.font_family{
+        min-width: 80px;
+    }
+    &>.font_size{
+        width: min-content;
+    }
+    &>.button,
+    &>.select_align>div>.button{
+        border: solid 1px $blue;
+        color: $blue;
+        margin: 5px;
+        padding: 3px;
+        height: 30px;
+        &.MuiButton-root{
+            min-width:min-content;
+            &>span>svg{
+                height: 20px;
+            }
+        }
+    }
+    &>.select_align{
+        &::before{
+            content: none;
+        }
+        &>div.MuiInputBase-input{
+            padding-top: 0px;
+            padding-bottom: 0px;
+            padding-right: 18px;
+        }    
+    }
+    
+    
+}

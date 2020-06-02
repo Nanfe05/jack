@@ -144,7 +144,20 @@
             padding: 0 30px;
             width: 100%;
             font-family: font_regular;
-
+            &>.scale_editor{
+                background-color: white;
+                padding: 5px;
+                border-radius: 5%;
+                &>label{
+                    font-size: 14px;
+                    color: $blue;
+                    font-family: font-bold;
+                }
+                &>div{
+                    color: $blue;
+                    font-size: 16px;
+                }
+            }
             &>.topbar_row{
                 flex-direction: row;
                 justify-content: center;
