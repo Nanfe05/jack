@@ -17,7 +17,7 @@ const Text01 = (props) =>{
         <div
         id={id}
         style={DynamicStyles(layout,breakpoint,id,editorSelected)}
-        className={`text01`}
+        
             onMouseDown={(e)=>{  
                 //e.preventDefault();
                 if(props.editorSelected === null || props.editorSelected !== id){
@@ -32,6 +32,8 @@ const Text01 = (props) =>{
             onInput={(e)=>{
                 console.log(e.target.innerText);
             }}
+            id={`${id}_content_editable`}
+            className={`text01`}
             >
                 {contents.text}
             </div>

@@ -1,4 +1,24 @@
-.text01{
-    font-family: font_regular;
-    text-align: center;
+div{
+    &.text01{
+            font-family: font_regular;
+        // font-weight: unset!important;
+        // font-style: unset!important;
+        // font-variant-caps: unset!important;
+        // font-weight: unset!important;
+        // font-stretch: unset!important;
+        // font-size: unset!important;
+        // line-height: unset!important;
+        // font-family: unset!important;
+        // font-size-adjust: unset!important;
+        // font-kerning: unset!important;
+        // font-optical-sizing: unset!important;
+        // font-variant-alternates: unset!important;
+        // font-variant-east-asian: unset!important;
+        // font-variant-ligatures: unset!important;
+        // font-variant-numeric: unset!important;
+        // font-variant-position: unset!important;
+        // font-language-override: unset!important;
+        // font-feature-settings: unset!important;
+        // font-variation-settings: unset!important;
+    }
 }

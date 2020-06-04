@@ -23,6 +23,8 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -45,4 +47,28 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+/*
+To Content Editable 
+*/
+b,strong{
+	font-weight: bold;
+}
+em,i{
+	font-style: italic;
+}
+ol{
+	list-style: decimal;
+	list-style-type: decimal;
+	list-style-position: inside;
+}
+ul{
+	list-style: circle inside;
+	list-style-type: circle inside;
+	list-style-position: inside;
+}
+
+*{
+	line-height: normal;
 }
