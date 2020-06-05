@@ -4,6 +4,12 @@
     align-items: center;
     height: 7vh;
     font-family: font-bold;
+    &.blue{
     background-color: $blue;
     color: white;
+    }
+    &.white{
+    background-color: white;
+    color: $blue;
+    }
 }

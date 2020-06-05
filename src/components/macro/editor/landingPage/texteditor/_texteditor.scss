@@ -40,6 +40,12 @@
             }
         }
     }
+    &>.button{
+        &.selected{
+            background-color: $blue;
+            color: white;
+        }
+    }
     &>.select_align{
         &::before{
             content: none;

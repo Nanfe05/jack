@@ -27,14 +27,14 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 
 const TextEditorTools = (props) =>{
 
-    //const itemSelected = document.getElementById(`${props.selected}_content_editable`);
-
+    const {textEditor} = props;
+    // const itemSelected = document.getElementById(`${props.selected}_content_editable`);
 
     return(<div className='text_editor_toolbar'>
         <form className='tet font_family'>
                      <InputLabel>Fuente: </InputLabel>
                     <Select
-                    placeholder='Roboto'
+                    value={textEditor.fontFamily}
                     onChange={(e)=>{
                         document.execCommand('fontName',false,e.target.value);
                     }}
@@ -54,12 +54,13 @@ const TextEditorTools = (props) =>{
                         <MenuItem value={'Indie Flower'} style={{fontFamily:'Indie Flower'}}>Indie Flower</MenuItem>
                         <MenuItem value={'Source Code Pro'} style={{fontFamily:'Source Code Pro'}}>Source Code Pro</MenuItem>
                         <MenuItem value={'Pacifico'} style={{fontFamily:'Pacifico'}}>Pacifico</MenuItem>
+                        <MenuItem value={'Hind'} style={{fontFamily:'Hind'}}>Hind</MenuItem>
                     </Select>
         </form>
         <form className='tet font_size'>
                      <InputLabel>Tamaño: </InputLabel>
                      <Select
-                    placeholder='4'
+                    value={textEditor.fontSize}
                     onChange={(e)=>{
                         document.execCommand('fontSize',false,e.target.value);
                     }}
@@ -73,31 +74,31 @@ const TextEditorTools = (props) =>{
                         <MenuItem value={'7'}>7</MenuItem>
                     </Select>
         </form>
-        <Button className='tet button' onClick={()=>{
+        <Button className={`tet button ${textEditor.fontWeight === '700' || textEditor.fontWeight === 'bold'?'selected':''}`} onClick={()=>{
             document.execCommand('bold');
         }
         }>
             <FormatBoldIcon/>
         </Button>
-        <Button className='tet button' onClick={()=>{
+        <Button className={`tet button ${textEditor.fontStyle.includes('italic') ?'selected':''}`} onClick={()=>{
             document.execCommand('italic');
         }
         }>
             <FormatItalicIcon/>
         </Button>
-        <Button className='tet button' onClick={()=>{
+        <Button className={`tet button ${textEditor.fontUnderline.includes('underline') ?'selected':''}`} onClick={()=>{
             document.execCommand('underline');
         }
         }>
             <FormatUnderlinedIcon/>
         </Button>
-        <Button className='tet button' onClick={()=>{
-           
+        <Button className='tet button'  
+        onClick={()=>{   
             let colorP = document.getElementById('color_picker_text');
             colorP.click();
         }}
         >
-            <FormatColorTextIcon/>
+            <FormatColorTextIcon style={{color:`${textEditor.fontColor}`}}/>
         </Button>
         <input type='color' id='color_picker_text' style={{display:'none'}} onChange={(e)=>{
             document.execCommand('foreColor',false,e.target.value);
@@ -108,13 +109,17 @@ const TextEditorTools = (props) =>{
             colorP.click();
         }}
         >
-            <FormatColorFillIcon/>
+            <FormatColorFillIcon style={{color:`${textEditor.fontBgColor === 'rgba(0, 0, 0, 0)'?'black':textEditor.fontBgColor}`}}/>
         </Button>
         <input type='color' id='color_picker_bg' style={{display:'none'}} onChange={(e)=>{
             document.execCommand('backColor',false,e.target.value);
         }}/>
         <Select
-        value='align-center'
+        value={textEditor.fontAlign.includes('center')?'align-center':
+                textEditor.fontAlign.includes('left')?'align-left':
+                textEditor.fontAlign.includes('right')?'align-right':
+                textEditor.fontAlign.includes('justify')?'align-justify':
+                'align-left'}
         className='tet select_align'
         >
             <MenuItem value={'align-left'}>
@@ -152,13 +157,13 @@ const TextEditorTools = (props) =>{
             
         </Select>
        
-        <Button className='tet button' onClick={()=>{
+        <Button className={`tet button ${textEditor.ListStyle.includes('decimal') ?'selected':''}`} onClick={()=>{
                     document.execCommand('insertOrderedList');
                 }
                 }>
             <ListIcon/>
         </Button>
-        <Button className='tet button' onClick={()=>{
+        <Button className={`tet button ${textEditor.ListStyle.includes('circle') ?'selected':''}`} onClick={()=>{
                     document.execCommand('insertUnorderedList');
                 }
                 }>
@@ -168,7 +173,8 @@ const TextEditorTools = (props) =>{
 };
 
 const mapStateToProps = state =>({
-    selected: state.editor.selected
+    selected: state.editor.selected,
+    textEditor : state.textEditor
 });
 
 export default connect(mapStateToProps)(TextEditorTools);
