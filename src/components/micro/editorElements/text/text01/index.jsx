@@ -10,6 +10,9 @@ import{TextEditorChange} from '../../../../../redux/actions/texteditor';
 // Special Functions
 import {DynamicStyles} from '../../functions';
 
+// HTML TO JSON
+import {HTMLToJSON} from './htmlToJson';
+
 const Text01 = (props) =>{
     const {id,contents,layout,breakpoint,editorSelected,TextEditorChange,textEditor} = props;
 
@@ -32,8 +35,7 @@ const Text01 = (props) =>{
             onSelect={(e)=>{
                 let getSelection = window.getSelection();
                 //let mySelection = e.target.innerText.substring(getSelection.anchorOffset,getSelection.focusOffset);
-                // console.log(getSelection.anchorNode.parentElement);
-                console.log(getComputedStyle(getSelection.anchorNode.parentElement));
+                
                 // Font Family
                  let fontFamily = getComputedStyle(getSelection.anchorNode.parentElement).fontFamily;
                  if(textEditor.fontFamily !== fontFamily){
@@ -94,7 +96,7 @@ const Text01 = (props) =>{
             }}
             contentEditable={true}
             onInput={(e)=>{
-                console.log(e.target.innerText);
+                HTMLToJSON(e.target);
             }}
             id={`${id}_content_editable`}
             className={`text01`}

@@ -171,6 +171,8 @@ const EditorLandingPage = (props) =>{
                 // DESELECT OBJECT IF CLICK ON CANVAS
                 if(e.target.id === 'canvas' || e.target.id === 'canvas_holder'){
                     if(props.editor.selected){
+                        // Conver to JSON ** If text 
+                        
                         props.SelectedObject(null);
                         props.ChangeTopBar(null);
                     }
