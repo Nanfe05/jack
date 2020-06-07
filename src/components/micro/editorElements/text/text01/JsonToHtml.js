@@ -1,52 +1,80 @@
 import React from 'react';
 
-export const JsonToHtml = (element) =>{
+// UNIQUE KEYS
+import { v4 as uuidv4 } from 'uuid';
 
-    // console.log(element);
-    let htmlObject = LoopThroughtObjects(element);
-    console.log(htmlObject);
+export const JsonToHtml = (element) =>{
+   
+    let htmlObject = SwitchElement(element);
     return htmlObject;
 
 };
 
-export const LoopThroughtObjects = (element) =>{
 
-    switch(element.element){
-        case 'font':
-            return <font style={Attributes(element)}>{
-                Childs(element)
-             }</font>
-        case 'b':
-            return <b>{
-                Childs(element)
-             }</b>;
-        case 'br':
-            return <br></br>;
-        case 'div':   
-        default:
-            return <div style={Attributes(element)} >{
-               Childs(element)
-            }</div>;
+// Function to Eval Childs
+const CheckIfObject = (el) =>{
+        if(typeof el === 'string'){
+            return  el;
+        }else if (typeof el === 'object'){
+            return SwitchElement(el);
+        }
+   
+}
+
+export const SwitchElement = (element) =>{
+    let result;
+    let childElements = element.child;
+    if(childElements.length > 0){
+        result = childElements.map((el) => {
+            switch(el.element){
+                case 'font':
+                    return  <font 
+                    style={Attributes(el)}
+                    key={uuidv4()}
+                    > 
+                    
+                        {CheckIfObject(el)}
+                     </font>
+                     
+                case 'b':
+                    return <b
+                    key={uuidv4()}
+                    >
+                        {CheckIfObject(el)}
+                     </b>;
+                     
+                case 'br':
+                    return <br 
+                    key={uuidv4()}/>;
+                   
+                case 'div':   
+                default:
+                return  <div 
+                key={uuidv4()}
+                    style={Attributes(el)} 
+                    
+                    >
+                        {CheckIfObject(el)}
+                    </div>;
+                   
+
+            }
+        });
     }
+    return result;
 };
 
 // Setting Attributes
 const Attributes=(element)=>{
-    if(element.Attributes){  
-        return {...element.Attributes};
+    let obj = {};
+    if(element.attributes){  
+        Object.keys(element.attributes).forEach((el)=>{
+            Object.entries(element.attributes[el]).forEach((e)=>{
+                obj[e[0]] = e[1];
+            });
+        });
     }
-    return {};
+    console.log({...obj});
+    console.log(obj);
+    return {...obj};
 };
-// Function to Eval Childs
-const Childs = (child) =>{
-    let childElements = child.child;
-    childElements.forEach((element,i) => {
-    let result;
-        if(typeof element === 'string'){
-            result =  element;
-        }else if (typeof element === 'object'){
-            result =  LoopThroughtObjects(element);
-        }
-    return result;
-    });
-}

@@ -24,7 +24,21 @@ const LoopThroughtChilds= (element) =>{
         Object.keys(attributes).forEach((el,i)=>{
             // Prevent this values that are assigned in each interaction
             let att_name =attributes[el].name;
-            if(att_name !== 'id' && att_name !== 'contenteditable'){
+            if(att_name !== 'id' && att_name !== 'contenteditable' && att_name !== 'class'){
+                let att_name_react;
+                switch(att_name){
+                    case 'align':
+                        att_name_react = 'textAlign';
+                        break;
+                    case 'size':
+                        att_name_react = 'fontSize';
+                        break; 
+                    case 'face':
+                        att_name_react = 'fontFamily';
+                        break;    
+                    default:
+                        att_name_react = attributes[el].name;
+                }
                     object.attributes.push(
                         {
                             [attributes[el].name]:attributes[el].value
