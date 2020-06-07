@@ -12,6 +12,8 @@ import {DynamicStyles} from '../../functions';
 
 // HTML TO JSON
 import {HTMLToJSON} from './htmlToJson';
+// JSON TO HTML
+import {JsonToHtml} from './JsonToHtml';
 
 const Text01 = (props) =>{
     const {id,contents,layout,breakpoint,editorSelected,TextEditorChange,textEditor} = props;
@@ -96,12 +98,14 @@ const Text01 = (props) =>{
             }}
             contentEditable={true}
             onInput={(e)=>{
-                HTMLToJSON(e.target);
+                console.log(HTMLToJSON(e.target));
             }}
             id={`${id}_content_editable`}
             className={`text01`}
             >
-                {contents.text}
+                {
+                 JsonToHtml(contents)
+                }
             </div>
         </div>
     )

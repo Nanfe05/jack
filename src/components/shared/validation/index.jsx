@@ -66,7 +66,7 @@ const ValidateToken = async (
         }catch(err){
             let errors = err.response.data.errors;
             if(errors){
-                console.log(errors);
+                // console.log(errors);
                 setTimeout(()=>{
                     Loading();
                     ErrorMsgs(errors);
