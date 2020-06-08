@@ -12,6 +12,29 @@ const myInitialState = {
 
 export default function(state = myInitialState, action){
     switch(action.type){
+        case actionType.EDITOR_EDIT_CONTENT:
+           
+            return{
+                ...state,
+                objects:state.objects.map((el)=>{
+                    
+                    if(el.id === state.selected){  
+                    
+                        const temp = {
+                            ...el,
+                            template:{
+                                ...el.template,
+                                content:action.payload
+                            }
+                        };
+                
+                       return {...temp};
+                    }
+                    return el;
+                    
+                    
+                })
+            }
         case actionType.EDITOR_OBJECT_EDIT:
             return{
                 ...state,

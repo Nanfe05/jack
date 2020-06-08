@@ -27,23 +27,25 @@ const LoopThroughtChilds= (element) =>{
             if(att_name !== 'id' && att_name !== 'contenteditable' && att_name !== 'class'){
                 let att_name_react;
                 switch(att_name){
-                    case 'align':
-                        att_name_react = 'textAlign';
-                        break;
-                    case 'size':
-                        att_name_react = 'fontSize';
-                        break; 
-                    case 'face':
-                        att_name_react = 'fontFamily';
-                        break;    
+                    // case 'align':
+                    //     att_name_react = 'textAlign';
+                    //     break;
+                    // case 'size':
+                    //     att_name_react = 'fontSize';
+                    //     break; 
+                    // case 'face':
+                    //     att_name_react = 'fontFamily';
+                    //     break;    
                     default:
                         att_name_react = attributes[el].name;
                 }
-                    object.attributes.push(
-                        {
-                            [attributes[el].name]:attributes[el].value
-                        }
-                    );
+
+                object.attributes.push(
+                    {
+                        // [attributes[el].name]:attributes[el].value
+                        [att_name_react]:attributes[el].value
+                    }
+                );
             }
         }
         );

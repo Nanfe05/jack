@@ -2,7 +2,9 @@ import React from 'react';
 
 // Redux 
 import {connect} from 'react-redux';
-import {AddElement,EditorScale,SelectedObject,ChangeTopBar,EditObject} from '../../../../redux/actions/editor';
+import {AddElement,EditorScale,SelectedObject,ChangeTopBar,EditObject,EditorEditContent} from '../../../../redux/actions/editor';
+// Functions
+import {HTMLToJSON} from '../../../micro/editorElements/text/text01/htmlToJson';
 // Material UI
 import InputLabel from '@material-ui/core/InputLabel';
 import IconButton from '@material-ui/core/IconButton';
@@ -171,8 +173,13 @@ const EditorLandingPage = (props) =>{
                 // DESELECT OBJECT IF CLICK ON CANVAS
                 if(e.target.id === 'canvas' || e.target.id === 'canvas_holder'){
                     if(props.editor.selected){
-                        // Conver to JSON ** If text 
-                        
+                        // Convert to JSON ** If text 
+                        let textElement = document.getElementById(`${props.editor.selected}_content_editable`)
+                        if(textElement){
+                            console.log('change of content');
+                            props.EditorEditContent(HTMLToJSON(textElement));
+                        }
+
                         props.SelectedObject(null);
                         props.ChangeTopBar(null);
                     }
@@ -212,5 +219,6 @@ export default connect(mapStateToProps,{
     EditorScale,
     SelectedObject,
     ChangeTopBar,
-    EditObject
+    EditObject,
+    EditorEditContent
 })(EditorLandingPage);

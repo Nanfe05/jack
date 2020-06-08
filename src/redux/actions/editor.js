@@ -32,3 +32,8 @@ export const ChangeTopBar = (payload) =>({
     type:actionType.CHANGE_TOPBAR,
     payload:payload
 });
+
+export const EditorEditContent = (payload) =>({
+    type: actionType.EDITOR_EDIT_CONTENT,
+    payload:payload
+});

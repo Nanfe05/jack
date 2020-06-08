@@ -1,24 +1,32 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 
 //Redux
 import {connect} from 'react-redux';
-import {SelectedObject,ChangeTopBar} from '../../../../../redux/actions/editor';
+import {SelectedObject,ChangeTopBar,EditorEditContent} from '../../../../../redux/actions/editor';
 import{TextEditorChange} from '../../../../../redux/actions/texteditor';
 // Components 
     // Micro 
     import SelectedTool from '../../../../micro/editorElements/selectedTool/';
+
 // Special Functions
 import {DynamicStyles} from '../../functions';
 
 // HTML TO JSON
-import {HTMLToJSON} from './htmlToJson';
+//import {HTMLToJSON} from './htmlToJson';
 // JSON TO HTML
 import {JsonToHtml} from './JsonToHtml';
 
 const Text01 = (props) =>{
     const {id,contents,layout,breakpoint,editorSelected,TextEditorChange,textEditor} = props;
 
+    useEffect(()=>{
+        let xyz= document.getElementById(`${id}_content_editable`);
+        xyz.innerHTML= JsonToHtml(contents);
+        // eslint-disable-next-line
+    },[contents]);
+
     const controllers = id === editorSelected ? <SelectedTool id={id}/>: <div></div>;
+    
     return(
         <div
         id={id}
@@ -97,15 +105,9 @@ const Text01 = (props) =>{
 
             }}
             contentEditable={true}
-            onInput={(e)=>{
-                console.log(HTMLToJSON(e.target));
-            }}
             id={`${id}_content_editable`}
             className={`text01`}
             >
-                {
-                 JsonToHtml(contents)
-                }
             </div>
         </div>
     )

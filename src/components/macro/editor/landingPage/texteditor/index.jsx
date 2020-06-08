@@ -34,7 +34,7 @@ const TextEditorTools = (props) =>{
         <form className='tet font_family'>
                      <InputLabel>Fuente: </InputLabel>
                     <Select
-                    value={textEditor.fontFamily}
+                    value={textEditor.fontFamily || ''}
                     onChange={(e)=>{
                         document.execCommand('fontName',false,e.target.value);
                     }}
@@ -55,6 +55,7 @@ const TextEditorTools = (props) =>{
                         <MenuItem value={'Source Code Pro'} style={{fontFamily:'Source Code Pro'}}>Source Code Pro</MenuItem>
                         <MenuItem value={'Pacifico'} style={{fontFamily:'Pacifico'}}>Pacifico</MenuItem>
                         <MenuItem value={'Hind'} style={{fontFamily:'Hind'}}>Hind</MenuItem>
+                        <MenuItem value={'serif'} style={{fontFamily:'serif'}}>Serif</MenuItem>
                     </Select>
         </form>
         <form className='tet font_size'>
