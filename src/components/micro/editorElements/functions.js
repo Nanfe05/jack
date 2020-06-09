@@ -67,8 +67,8 @@ export const DynamicStyles = (layout,breakpoint,id,editorSelected) =>{
         boxSizing:'border-box',
         padding:`${layout[breakpoint].padding?layout[breakpoint].padding:layout.md.padding}px`,
         position:`${layout[breakpoint].position?layout[breakpoint].position:layout.md.position}`,
-        left:`${layout[breakpoint].position_left?layout[breakpoint].position_left:layout.md.position_left}px`,
-        top:`${layout[breakpoint].position_top?layout[breakpoint].position_top:layout.md.position_top}px`,
+        left:`${layout[breakpoint].position_left?layout[breakpoint].position_left:layout.md.position_left}%`,
+        top:`${layout[breakpoint].position_top?layout[breakpoint].position_top:layout.md.position_top}%`,
         transform:`rotate(${layout[breakpoint].rotation?layout[breakpoint].rotation:layout.md.rotation}deg) 
             scale(${layout[breakpoint].scale_x?layout[breakpoint].scale_x:layout.md.scale_x},
             ${layout[breakpoint].scale_y?layout[breakpoint].scale_y:layout.md.scale_y})

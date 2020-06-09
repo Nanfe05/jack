@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 
 //Redux
 import {connect} from 'react-redux';
-import {SelectedObject,ChangeTopBar,EditorEditContent} from '../../../../../redux/actions/editor';
+import {SelectedObject,ChangeTopBar} from '../../../../../redux/actions/editor';
 import{TextEditorChange} from '../../../../../redux/actions/texteditor';
 // Components 
     // Micro 
@@ -16,14 +16,23 @@ import {DynamicStyles} from '../../functions';
 // JSON TO HTML
 import {JsonToHtml} from './JsonToHtml';
 
+
+const UpdateTextContentWithJson = (id,contents) =>{
+    let textBox = document.getElementById(`${id}_content_editable`);
+    textBox.innerHTML= JsonToHtml(contents);
+    // Prevent Memory Leak
+    //textBox.parentNode.removeChild(textBox);
+};
+
+
 const Text01 = (props) =>{
     const {id,contents,layout,breakpoint,editorSelected,TextEditorChange,textEditor} = props;
-
     useEffect(()=>{
-        let xyz= document.getElementById(`${id}_content_editable`);
-        xyz.innerHTML= JsonToHtml(contents);
-        // eslint-disable-next-line
-    },[contents]);
+       UpdateTextContentWithJson(id,contents);
+    }
+    // eslint-disable-next-line
+    ,[contents]
+    );
 
     const controllers = id === editorSelected ? <SelectedTool id={id}/>: <div></div>;
     
@@ -108,6 +117,7 @@ const Text01 = (props) =>{
             id={`${id}_content_editable`}
             className={`text01`}
             >
+                
             </div>
         </div>
     )

@@ -125,8 +125,6 @@
                 position: absolute;
                 left: 5%;
                 top:5%;
-                height: 1200px;
-                width: 900px;
                 background-color: white;
                 transform-origin: 0 0;
                 
@@ -169,20 +167,55 @@
                     width: 40%;
                     padding: 0 5%;
                     flex-grow: 1;
+                    &>label{
+                        font-size: 14px;
+                        color: $blue;
+                        font-family: font-bold;
+                    }
+                    &>div{
+                        color: $blue;
+                        font-size: 16px;
+                    }
                 }
+                &.oneElement{
+                    width: 40%;
+                    &>.MuiFormControl-root.MuiTextField-root{
+                        width: 90%;
+                    }
+                }
+               
             }
             .topbar_col{
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
             }
-
+            
+            .footer_toolbar{
+                background-color: white;
+                padding: 5px;
+                border-radius: 5%;
+                margin-left: 15px;
+                width: 50px;
+                &>label{
+                    font-size: 14px;
+                    color: $blue;
+                    font-family: font-bold;
+                }
+                &>div{
+                    color: $blue;
+                    font-size: 16px;
+                }
+            }
 
 
             &>button{
                 margin: 0px;
             }
             &>.breakpoints{
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 background-color: white;
                 border-radius: 10px;
                 padding: 0 5px;
@@ -197,7 +230,16 @@
                             height: 20px;
                         }
                     }
+                    &.selected{
+                        background-image: linear-gradient(-90deg,$green,$green-2);
+                        &>span{
+                            &>svg{
+                                color: white;
+                            }
+                        }
+                    }
                 }
+                
             }
         }
     }

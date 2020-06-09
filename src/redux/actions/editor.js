@@ -37,3 +37,22 @@ export const EditorEditContent = (payload) =>({
     type: actionType.EDITOR_EDIT_CONTENT,
     payload:payload
 });
+
+export const ChangeBreakPoint = (payload) =>({
+    type: actionType.EDITOR_CHANGE_BREAKPOINT,
+    payload:payload
+});
+
+export const ChangeEditorHeight = (payload) =>({
+    type: actionType.EDITOR_ADJUST_HEIGHT,
+    payload:payload
+});
+
+export const EditorClearCanvas = () =>({
+    type: actionType.EDITOR_CLEAR_CANVAS
+});
+
+export const EditorNameChange = (payload) =>({
+    type: actionType.EDITOR_NAME_CHANGE,
+    payload:payload
+});

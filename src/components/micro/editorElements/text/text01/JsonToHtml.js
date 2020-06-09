@@ -89,11 +89,13 @@ export const SwitchElement = (element) =>{
                         </div>`;
                         break;
                 default:
-                    result +=   `<span
-                    ${Attributes(el)}>
-                         ${CheckIfObject(el)}
-                    </span>`;
+                    result +=   `${CheckIfObject(el)}`;
                     break;
+                    // result +=   `<span
+                    // ${Attributes(el)}>
+                    //      ${CheckIfObject(el)}
+                    // </span>`;
+                    // break;
 
             }
         });

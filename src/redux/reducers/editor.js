@@ -3,17 +3,64 @@ import * as actionType from '../actionTypes';
 
 
 const myInitialState = {
+    lp_name:' ',
     selected:null,
     topBar:null,
     scale:1,
     breakpoint:'md',
+    sizes:{
+        xs:{
+            width:300,
+            height:500
+        },
+        sm:{
+            width:600,
+            height:1000
+        },
+        md:{
+            width:960,
+            height:1200
+        },
+        lg:{
+            width:1280,
+            height:1200
+        },
+        xl:{
+            width:1920,
+            height:1200
+        }
+    },
     objects:[]
 };
 
 export default function(state = myInitialState, action){
     switch(action.type){
+        case actionType.EDITOR_NAME_CHANGE:
+            return{
+                ...state,
+                lp_name:action.payload
+            }
+        case actionType.EDITOR_CLEAR_CANVAS:
+            return{
+                ...myInitialState
+            }
+        case actionType.EDITOR_ADJUST_HEIGHT:
+            return{
+                ...state,
+                sizes:{
+                    ...state.sizes,
+                    [state.breakpoint]:{
+                        ...state.sizes[state.breakpoint],
+                        height:action.payload
+                    }
+                }
+            }
+        case actionType.EDITOR_CHANGE_BREAKPOINT:
+            return{
+                ...state,
+                breakpoint:action.payload
+            }
         case actionType.EDITOR_EDIT_CONTENT:
-           
             return{
                 ...state,
                 objects:state.objects.map((el)=>{

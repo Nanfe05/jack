@@ -104,14 +104,14 @@ const ModificationToolbar = ({editor,EditObject}) =>{
                     value={layout[bk].position_left} onChange={(e)=>{
                         EditObject('position_left',e.target.value);
                     }}
-                    /><h5>px</h5>
+                    /><h5>%</h5>
                 </div>
                 <div className='row'>
                     <h5>From Left:</h5><TextField label='Y' variant='outlined' className='edit_tool'
                     value={layout[bk].position_top} onChange={(e)=>{
                         EditObject('position_top',e.target.value);
                     }}
-                    /><h5>px</h5>
+                    /><h5>%</h5>
                 </div>
             </div>
             <div className='col'>

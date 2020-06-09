@@ -7,12 +7,14 @@ const TransformAttributes = (element, toAvoid) =>{
     return element.style.transform.replace(/\s/g,'').replace(/s/g,' s').replace(/r/g,' r').split(' ').filter((el)=>!el.includes(toAvoid)).join(' ');
 }
 
-const MoveObject = (e,id,EditObject) =>{
+const MoveObject = (e,id,EditObject,breakpoint,sizes) =>{
         e.preventDefault();
 
         let posx1, posx2, posy1,posy2 = 0;
         posx1= e.clientX;
         posy1=e.clientY;
+
+
 
 
         const element = document.getElementById(id);
@@ -24,16 +26,43 @@ const MoveObject = (e,id,EditObject) =>{
         document.onmousemove=(e)=>{
             e.preventDefault();
             
+            let decimalPlaces = 2;
+
             posx2=posx1-e.clientX;
             posy2=posy1-e.clientY;
             posx1=e.clientX;
             posy1=e.clientY;
-            element.style.top= (element.offsetTop - posy2)+'px';
-            element.style.left= (element.offsetLeft - posx2 )+'px';
+
+            let posicionY= element.offsetTop - posy2;
+            let posicionX = element.offsetLeft - posx2;
+
+            let totalX = sizes[breakpoint].width;
+            let totalY = sizes[breakpoint].height;
+
+            let percentageX = ((posicionX*100)/totalX).toFixed(decimalPlaces);
+            let percentageY = ((posicionY*100)/totalY).toFixed(decimalPlaces);
+
+            element.style.top= percentageY+'%';
+            element.style.left= percentageX+'%';
+            // element.style.top= (element.offsetTop - posy2)+'px';
+            // element.style.left= (element.offsetLeft - posx2 )+'px';
+
         };
         document.onmouseup=(e)=>{
+            let decimalPlaces = 2;
             
-            EditObject('position_left',(element.offsetLeft ),'position_top',(element.offsetTop ));
+            let posicionY= element.offsetTop ;
+            let posicionX = element.offsetLeft ;
+
+            let totalX = sizes[breakpoint].width;
+            let totalY = sizes[breakpoint].height;
+
+            let percentageX = ((posicionX*100)/totalX).toFixed(decimalPlaces);
+            let percentageY = ((posicionY*100)/totalY).toFixed(decimalPlaces);
+
+
+
+            EditObject('position_left',(percentageX ),'position_top',(percentageY ));
             document.onmouseup = null;
             document.onmousemove = null;
         }
@@ -119,7 +148,7 @@ const RotateObject = (e,id,EditObject) =>{
 const SelectedTool = (props) =>{
     return(<Fragment >
         <div className='selected_tool_border'
-        onMouseDown={(e)=>MoveObject(e,props.id,props.EditObject)}
+        onMouseDown={(e)=>MoveObject(e,props.id,props.EditObject,props.breakpoint,props.sizes)}
         ></div>
         <div className='selected_tool_rotate'
         onMouseDown={(e)=>RotateObject(e,props.id,props.EditObject)}></div>
@@ -136,7 +165,11 @@ const SelectedTool = (props) =>{
     </Fragment>);
 };
 
+const mapStateToProps = state =>({
+    breakpoint: state.editor.breakpoint,
+    sizes: state.editor.sizes
+});
 
-export default connect(null,{
+export default connect(mapStateToProps,{
     EditObject
 })(SelectedTool);

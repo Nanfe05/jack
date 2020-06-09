@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // Redux 
 import {connect} from 'react-redux';
-import {AddElement,EditorScale,SelectedObject,ChangeTopBar,EditObject,EditorEditContent} from '../../../../redux/actions/editor';
+import {
+    AddElement,
+    EditorScale,
+    SelectedObject,
+    ChangeTopBar,
+    EditObject,
+    EditorEditContent,
+    ChangeBreakPoint,
+    ChangeEditorHeight,
+    EditorClearCanvas,
+    EditorNameChange} from '../../../../redux/actions/editor';
+import {SetErrorsMsg,SetSuccessMsg} from '../../../../redux/actions/uiGeneral';
 // Functions
 import {HTMLToJSON} from '../../../micro/editorElements/text/text01/htmlToJson';
 // Material UI
@@ -31,7 +42,7 @@ import NewsLetterSubscribe from '../../../micro/editorElements/forms/newsLetterS
 import Text01 from '../../../micro/editorElements/text/text01/';
 import Box01 from '../../../micro/editorElements/boxes/background/';
 import Media01 from '../../../micro/editorElements/media/media01/';
-// Generate IDs
+// Generate Unique IDs
 import {v4 as uuidv4} from 'uuid';
 /*
 COMPONENT STYLES SHOULD BE BROUGHT FROM SERVER 
@@ -40,10 +51,18 @@ import * as forms from '../../../micro/editorElements/forms/newsLetterSubscribe/
 import * as texts from '../../../micro/editorElements/text/text01/baseLayout.json';
 import * as boxes from '../../../micro/editorElements/boxes/background/baseLayout.json';
 import * as media from '../../../micro/editorElements/media/media01/baseLayout.json';
-
-
+// Server Communication
+const axios = require('axios');
 
 const EditorLandingPage = (props) =>{
+
+    // IF NAME IS NULL CHANGE NAME
+    useEffect(()=>{
+        if(props.editor.lp_name.replace(/\s/g,'') === ''){
+            props.EditorNameChange(uuidv4());
+        }
+    });
+
     const elements = props.editor.objects.length > 0 && props.editor.objects.map((el,i)=>{
         if(el.component === 'NewsLetterSubscribe'){
             let id = el.id;
@@ -123,7 +142,14 @@ const EditorLandingPage = (props) =>{
 
 
     const topBar = !props.editor.topBar ?
-    <div></div>:
+    <div className='topbar_row oneElement'>
+        <TextField label={'Nombre de la Landing Page:'}
+            value={props.editor.lp_name}
+            onChange={(e)=>{
+                props.EditorNameChange(e.target.value);
+            }}
+            />
+    </div>:
     props.editor.topBar === 'img'?
     <div className='topbar_row'>
             <TextField label={'Direccion URL:'}
@@ -176,7 +202,8 @@ const EditorLandingPage = (props) =>{
                         // Convert to JSON ** If text 
                         let textElement = document.getElementById(`${props.editor.selected}_content_editable`)
                         if(textElement){
-                            console.log('change of content');
+                            // console.log('change of content');
+                            // console.log(HTMLToJSON(textElement));
                             props.EditorEditContent(HTMLToJSON(textElement));
                         }
 
@@ -185,25 +212,80 @@ const EditorLandingPage = (props) =>{
                     }
                 }
             }}>
-                    <div id='canvas' className='canvas_editor_landingPage' style={{transform:`scale(${props.editor.scale},${props.editor.scale})`}}>
+                    <div id='canvas' className='canvas_editor_landingPage' 
+                        style={{
+                            transform:`scale(${props.editor.scale},${props.editor.scale})`,
+                            width:`${props.editor.sizes[props.editor.breakpoint].width}px`,
+                            height:`${props.editor.sizes[props.editor.breakpoint].height}px`
+                            }}>
                         {elements}
                     </div>
             </div>
             <div className='canvas_footer'>
-                <ColorsButton label='Descartar' classes='blue'/>
+                <ColorsButton label='Borrar Canvas' classes='blue' action={()=>{
+                    props.EditorClearCanvas();
+                }}/>
                   <div className='breakpoints'>
                      <span>Break Points:</span>
-                     <IconButton>
+                     {/*xs*/}
+                     <IconButton 
+                     className={`${props.editor.breakpoint === 'sm' ?'selected':''}`}
+                     onClick={()=>{
+                         props.ChangeBreakPoint('sm');
+                     }}>
                         <PhoneIphoneIcon/>
                      </IconButton>
-                     <IconButton>
+                     <IconButton 
+                     className={`${props.editor.breakpoint === 'md' ?'selected':''}`}
+                     onClick={()=>{
+                         props.ChangeBreakPoint('md');
+                     }}>
                          <LaptopChromebookIcon/>
                      </IconButton>
-                     <IconButton>
+                     <IconButton 
+                     className={`${props.editor.breakpoint === 'lg' ?'selected':''}`}
+                     onClick={()=>{
+                         props.ChangeBreakPoint('lg');
+                     }}>
                          <PersonalVideoIcon/>
                      </IconButton>
+                      {/*xl*/}
+                      <TextField className={'footer_toolbar'} label={'X Size:'}
+                        value={props.editor.sizes[props.editor.breakpoint].height}
+                        onChange={(e)=>{
+                            props.ChangeEditorHeight(e.target.value)
+                        }}
+                        />
                  </div>
-                <ColorsButton label='Guardar' classes='green'/>
+                <ColorsButton label='Guardar' classes='green' action={async(e)=>{
+                    e.preventDefault();
+
+                    let payload = {
+                        token:localStorage.getItem('x-jackMarketing-token'),
+                        payload:props.editor
+                    };
+                    let headers = {
+                        'content-type':'application/json',
+                    };
+                    try{
+                        let response = await axios.post('/jackmarketing/landingpage',payload,headers);
+                        // Set User Message
+                        if(response.data.success){
+                            props.SetSuccessMsg(response.data.success);
+                        }
+                        console.log(response);
+                    }catch(err){
+                        let errors = err.response.data.errors;
+                        if(errors){
+                            console.log(errors);
+                            setTimeout(()=>{
+                                
+                                props.SetErrorsMsg(errors);
+                            },1000)
+                        }
+                    }
+
+                }}/>
             </div>
         </div>
     </div>);
@@ -220,5 +302,12 @@ export default connect(mapStateToProps,{
     SelectedObject,
     ChangeTopBar,
     EditObject,
-    EditorEditContent
+    EditorEditContent,
+    ChangeBreakPoint,
+    ChangeEditorHeight,
+    EditorClearCanvas,
+    EditorNameChange,
+    SetErrorsMsg,
+    SetSuccessMsg
+
 })(EditorLandingPage);
