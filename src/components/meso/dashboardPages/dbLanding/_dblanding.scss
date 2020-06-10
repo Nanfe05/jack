@@ -8,10 +8,14 @@
         overflow-y: auto;
         padding: 15px;
         &>h2{
-
+            color: $blue;
             font-family:font-bold ;
             padding: 15px 0;
             font-size: 18px;
+        }
+        &>.row{
+            display: flex;
+            flex-direction: row;
         }
         .landingpages_holder{
             min-height: 250px;

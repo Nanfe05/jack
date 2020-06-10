@@ -5,6 +5,10 @@
         "template":{
             "content":{"element":"div","attributes":[],"child":[{"element":"div","attributes":[{"align":"center"}],"child":[{"element":"font","attributes":[{"face":"Snippet"}],"child":[{"element":"b","attributes":[],"child":[{"element":"font","attributes":[{"size":"4"}],"child":["Lorem Ipsum"]}]}]},{"element":"br","attributes":[],"child":[]}]},{"element":"div","attributes":[{"align":"justify"}],"child":[" ",{"element":"font","attributes":[{"color":"#ff0000"}],"child":[{"element":"font","attributes":[{"color":"#000000"}],"child":["Lorem Ipsum"]}," "]},"is simply dummy text of the printing and typesetting industry. ",{"element":"br","attributes":[],"child":[]}]}]},
             "layout":{
+            "xs":{
+            
+            }
+            ,
             "sm":{
                 
                 }
@@ -34,7 +38,11 @@
                 {
                 
                 }
-            
+            ,
+            "xl":
+                {
+                
+                }
             }
     }
     }

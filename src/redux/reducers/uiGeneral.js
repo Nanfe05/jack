@@ -13,11 +13,29 @@ const initialState = {
         logged:false,
         name:'',
         needValidation:false
+    },
+    lps_loaded:false,
+    landingpages:{
+        lp_public:[],
+        lp_private:[]
     }
 }
 
 export default function(state= initialState, action){
     switch(action.type){
+        case actionType.UI_ISLOADED_LANDINGPAGES:
+            return{
+                ...state,
+                lps_loaded:!state.lps_loaded
+            }
+        case actionType.UI_ADD_LANDINGPAGES:
+            return{
+                ...state,
+                landingpages:{
+                    lp_public: action.lp_public,
+                    lp_private:action.lp_private
+                }
+            }
         case actionType.USER_NEED_VALIDATION:
             return{
                 ...state,

@@ -10,6 +10,10 @@
                 "input_submit_label":"Suscribirse !"
             },
             "layout":{
+            "xs":{
+            
+            }
+            ,
             "sm":{
                 
                 }
@@ -38,7 +42,11 @@
             "lg":
                 {
                 
-                }
+                },
+            "xl":
+            {
+            
+            }
             
             }
     }

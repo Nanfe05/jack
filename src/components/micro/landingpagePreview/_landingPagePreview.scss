@@ -1,3 +1,31 @@
+.landing_preview_group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &>h3{
+        font-family: font-bold;
+        text-transform: uppercase;
+        color: $blue;
+        margin-bottom: 5px;
+    }
+    &>h4{
+        font-family: font-bold;
+        text-transform: capitalize;
+        color: $blue;
+        margin-top: 10px;
+        text-decoration: underline;
+        cursor: pointer;
+        &>a{
+            &:active,
+            &::selection,
+            &:visited{
+                color: $blue;
+            }
+        }
+    }
+}
+
 .MuiPaper-root.landingpage_preview{
     height: 250px;
     min-width: 200px;
@@ -5,6 +33,7 @@
     box-sizing: border-box;
     margin: 0 20px;
     overflow: hidden;
+    cursor: pointer;
     &>.lpp_image1{
         background-color: lightgrey;
         width: 100%;
@@ -21,13 +50,14 @@
         }
     }
     &>.lpp_text{
-        height: 40%;
-        padding: 5px;
+        height: 35%;
+        padding: 15px;
         overflow: hidden;
         &>p{
+            
             height: 100%;
             overflow: hidden;
-            width: 60%;
+            width: 100%;
             text-align: justify;
             font-family: font-light;
             color: lightgray;

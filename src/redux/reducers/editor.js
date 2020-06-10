@@ -3,6 +3,7 @@ import * as actionType from '../actionTypes';
 
 
 const myInitialState = {
+    project_id:null,
     lp_name:' ',
     selected:null,
     topBar:null,
@@ -35,6 +36,11 @@ const myInitialState = {
 
 export default function(state = myInitialState, action){
     switch(action.type){
+        case actionType.EDITOR_SET_PROJECT_ID:
+            return{
+                ...state,
+                project_id:action.payload
+            }
         case actionType.EDITOR_NAME_CHANGE:
             return{
                 ...state,

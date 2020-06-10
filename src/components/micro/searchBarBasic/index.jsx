@@ -18,6 +18,7 @@ const SearchBarBasic = (props) =>{
                     </InputAdornment>
                 )
             }}
+            disabled
            />
 
            

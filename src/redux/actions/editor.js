@@ -56,3 +56,7 @@ export const EditorNameChange = (payload) =>({
     type: actionType.EDITOR_NAME_CHANGE,
     payload:payload
 });
+export const EditorSetProjectID = (payload) =>({
+    type: actionType.EDITOR_SET_PROJECT_ID,
+    payload:payload
+});

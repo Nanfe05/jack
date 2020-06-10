@@ -49,3 +49,14 @@ export const SetUserName = (payload) =>({
 export const UserNeedValidation = () =>({
     type: actionType.USER_NEED_VALIDATION
 });
+/*
+Landing Pages
+*/
+export const UIaddLandingPages = (lp_public,lp_private) =>({
+    type:  actionType.UI_ADD_LANDINGPAGES,
+    lp_public:lp_public,
+    lp_private:lp_private
+});
+export const UIisLoadedLandingPages =() =>({
+    type: actionType.UI_ISLOADED_LANDINGPAGES
+})

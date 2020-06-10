@@ -72,7 +72,7 @@ const Logged = (props) =>{
     return(
         <div className='dashboard_header'>
             <Logo classes='white' icon={'white'}/>
-            <ColorsButton label='Hazte Premium' classes='green'/>
+            <ColorsButton label='Hazte Premium' classes='green' disabled/>
             <div className='user_logout'>
                 <h2>{`Hola ${props.userName}!`}</h2>
                 <ColorsButton label='Logout' classes='green' action={props.logOut}/>

@@ -29,6 +29,8 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import PhotoSizeSelectActualIcon from '@material-ui/icons/PhotoSizeSelectActual';
 import CropLandscapeIcon from '@material-ui/icons/CropLandscape';
 
+import DesktopWindowsIcon from '@material-ui/icons/DesktopWindows';
+import TabletAndroidIcon from '@material-ui/icons/TabletAndroid';
 import LaptopChromebookIcon from '@material-ui/icons/LaptopChromebook';
 import PersonalVideoIcon from '@material-ui/icons/PersonalVideo';
 import PhoneIphoneIcon from '@material-ui/icons/PhoneIphone';
@@ -54,6 +56,20 @@ import * as media from '../../../micro/editorElements/media/media01/baseLayout.j
 // Server Communication
 const axios = require('axios');
 
+const SettingProjectEnvironment = () =>{
+    // IS THE PROJECT -> NEW, UPDATE OR FROM LAYOUT ?
+    let url = new URL(window.location.href);
+    let isupdate = url.searchParams.get('u');
+    let lp_id= url.searchParams.get('lp');
+    // ask server for the document if lp 
+    // set id if update 
+    // set server response
+    // Work on Back - if save check if user is ownes . save , sent retro 
+    console.log(lp_id);
+};
+
+
+
 const EditorLandingPage = (props) =>{
 
     // IF NAME IS NULL CHANGE NAME
@@ -62,6 +78,10 @@ const EditorLandingPage = (props) =>{
             props.EditorNameChange(uuidv4());
         }
     });
+    useEffect(()=>{
+        SettingProjectEnvironment();
+    });
+
 
     const elements = props.editor.objects.length > 0 && props.editor.objects.map((el,i)=>{
         if(el.component === 'NewsLetterSubscribe'){
@@ -227,13 +247,20 @@ const EditorLandingPage = (props) =>{
                 }}/>
                   <div className='breakpoints'>
                      <span>Break Points:</span>
-                     {/*xs*/}
+                     
+                     <IconButton 
+                     className={`${props.editor.breakpoint === 'xs' ?'selected':''}`}
+                     onClick={()=>{
+                         props.ChangeBreakPoint('xs');
+                     }}>
+                        <PhoneIphoneIcon/>
+                     </IconButton>
                      <IconButton 
                      className={`${props.editor.breakpoint === 'sm' ?'selected':''}`}
                      onClick={()=>{
                          props.ChangeBreakPoint('sm');
                      }}>
-                        <PhoneIphoneIcon/>
+                        <TabletAndroidIcon/>
                      </IconButton>
                      <IconButton 
                      className={`${props.editor.breakpoint === 'md' ?'selected':''}`}
@@ -247,9 +274,15 @@ const EditorLandingPage = (props) =>{
                      onClick={()=>{
                          props.ChangeBreakPoint('lg');
                      }}>
+                         <DesktopWindowsIcon/>
+                     </IconButton>
+                     <IconButton 
+                     className={`${props.editor.breakpoint === 'xl' ?'selected':''}`}
+                     onClick={()=>{
+                         props.ChangeBreakPoint('xl');
+                     }}>
                          <PersonalVideoIcon/>
                      </IconButton>
-                      {/*xl*/}
                       <TextField className={'footer_toolbar'} label={'X Size:'}
                         value={props.editor.sizes[props.editor.breakpoint].height}
                         onChange={(e)=>{
@@ -273,11 +306,11 @@ const EditorLandingPage = (props) =>{
                         if(response.data.success){
                             props.SetSuccessMsg(response.data.success);
                         }
-                        console.log(response);
+                        //console.log(response);
                     }catch(err){
                         let errors = err.response.data.errors;
                         if(errors){
-                            console.log(errors);
+                            //console.log(errors);
                             setTimeout(()=>{
                                 
                                 props.SetErrorsMsg(errors);
