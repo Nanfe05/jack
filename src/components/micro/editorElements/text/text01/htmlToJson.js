@@ -39,7 +39,7 @@ const LoopThroughtChilds= (element) =>{
                     default:
                         att_name_react = attributes[el].name;
                 }
-
+                // console.log(`${att_name_react}:${attributes[el].value}`);
                 object.attributes.push(
                     {
                         // [attributes[el].name]:attributes[el].value

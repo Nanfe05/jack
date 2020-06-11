@@ -8,7 +8,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 // Components
 import {Text01,Box01,Media01,NewsLetterSubscribe} from './plainComponents';
 
-
+import './index.css';
 
 // Unique IDs
 //import { v4 as uuidv4 } from 'uuid';
@@ -60,6 +60,7 @@ const LandingPageViewer = (props) =>{
     const [contents,setContents]=useState([]);
     const [sizes,setSizes] = useState({});
     const [breakPoint,setBreakPoint] = useState('md');
+    const [clientW,setClientW] =useState(document.documentElement.clientWidth);
 
     let params = new URLSearchParams(window.location.search);
     // Setting Contents
@@ -76,6 +77,7 @@ const LandingPageViewer = (props) =>{
             // SET EVENT LISTENER
             window.addEventListener('resize',()=>{
                 SizeBreakPoint(sizes,setBreakPoint);
+                setClientW(document.documentElement.clientWidth);
             });
         }    
     // eslint-disable-next-line
@@ -125,10 +127,11 @@ const LandingPageViewer = (props) =>{
     });
 
 
-    return(<div style={{
+    return(<div 
+    className='preview_container'
+    style={{
         height:sizes[breakPoint].height,
-        width:'100%',
-        overflow:'hidden'
+        width:clientW,
     }}>
         {elements}
     </div>);

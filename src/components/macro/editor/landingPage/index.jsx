@@ -92,7 +92,7 @@ const SettingProjectEnvironment = async(
                     lps.data.content.content.sizes,
                     name
                 );
-                console.log(lps.data.content);
+                //console.log(lps.data.content);
                 if(lps.data.success){
                     SetSuccessMsg(lps.data.success);
                 }

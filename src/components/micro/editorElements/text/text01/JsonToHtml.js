@@ -27,7 +27,9 @@ const Attributes=(element)=>{
     if(element.attributes){  
         Object.keys(element.attributes).forEach((el)=>{
             Object.entries(element.attributes[el]).forEach((e)=>{
-                obj += ` ${e[0]}=${e[1]} `;
+                
+                    obj += ` ${e[0]}='${e[1]}' `;
+               
             });
         });
     }

@@ -95,7 +95,7 @@ const ModificationToolbar = ({editor,EditObject}) =>{
                 <h4>Padding: </h4>
                 <div className='row'>
                     <TextField label='Padding' variant='outlined' className='edit_tool' 
-                    value={`${GetNearestValue(layout,bk,'padding')}`} onChange={(e)=>{
+                    value={`${GetNearestValue(layout,bk,'padding')||0}`} onChange={(e)=>{
                         EditObject('padding',e.target.value);
                     }}/><h5>px</h5>
             </div>
@@ -111,7 +111,7 @@ const ModificationToolbar = ({editor,EditObject}) =>{
                     /><h5>%</h5>
                 </div>
                 <div className='row'>
-                    <h5>From Left:</h5><TextField label='Y' variant='outlined' className='edit_tool'
+                    <h5>From Top:</h5><TextField label='Y' variant='outlined' className='edit_tool'
                     value={GetNearestValue(layout,bk,'position_top')} onChange={(e)=>{
                         EditObject('position_top',e.target.value);
                     }}
@@ -122,7 +122,7 @@ const ModificationToolbar = ({editor,EditObject}) =>{
                 <h4>Rotacion</h4>
                 <div className='row'>
                     <TextField label='Degrees' variant='outlined' className='edit_tool'
-                    value={GetNearestValue(layout,bk,'rotation')} onChange={(e)=>{
+                    value={GetNearestValue(layout,bk,'rotation')||0} onChange={(e)=>{
                         EditObject('rotation',e.target.value);
                     }}
                     />
