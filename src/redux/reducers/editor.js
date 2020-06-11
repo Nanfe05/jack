@@ -9,6 +9,7 @@ const myInitialState = {
     topBar:null,
     scale:1,
     breakpoint:'md',
+    isLoadingContents:true,
     sizes:{
         xs:{
             width:300,
@@ -36,6 +37,19 @@ const myInitialState = {
 
 export default function(state = myInitialState, action){
     switch(action.type){
+        case actionType.EDITOR_SWITCH_IS_LOADING_CONTENTS:
+            return{
+                ...state,
+                isLoadingContents:!state.isLoadingContents
+            }
+        case actionType.EDITOR_SET_WHOLE_PROJECT:
+            let lp_name = action.name ? action.name:'';
+            return{
+                ...state,
+                objects:action.objects,
+                sizes:action.sizes,
+                lp_name
+            }
         case actionType.EDITOR_SET_PROJECT_ID:
             return{
                 ...state,
@@ -48,7 +62,30 @@ export default function(state = myInitialState, action){
             }
         case actionType.EDITOR_CLEAR_CANVAS:
             return{
-                ...myInitialState
+                ...state,
+                sizes:{
+                    xs:{
+                        width:300,
+                        height:500
+                    },
+                    sm:{
+                        width:600,
+                        height:1000
+                    },
+                    md:{
+                        width:960,
+                        height:1200
+                    },
+                    lg:{
+                        width:1280,
+                        height:1200
+                    },
+                    xl:{
+                        width:1920,
+                        height:1200
+                    }
+                },
+                objects:[]
             }
         case actionType.EDITOR_ADJUST_HEIGHT:
             return{
@@ -95,7 +132,7 @@ export default function(state = myInitialState, action){
                     
                     if(el.id === state.selected){  
                     
-                        if(el.template.layout[state.breakpoint].position !== 'absolute'){
+                        if(el.template.layout[state.breakpoint] && el.template.layout[state.breakpoint].position !== 'absolute'){
                             el.template.layout[state.breakpoint].position = 'absolute';
                         }
                         const temp = {

@@ -17,6 +17,8 @@
         text-decoration: underline;
         cursor: pointer;
         &>a{
+            &:link,
+            &:hover,
             &:active,
             &::selection,
             &:visited{

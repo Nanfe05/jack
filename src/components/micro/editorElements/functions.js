@@ -1,8 +1,8 @@
 const BackGroundChooser = (layout,breakpoint)=>{
 
-    let backgroundtype= layout[breakpoint].background?layout[breakpoint].background:layout.md.background;
+    let backgroundtype= GetNearestValue(layout,breakpoint,'background');
 
-    let color1 = layout[breakpoint].background_color_1?layout[breakpoint].background_color_1:layout.md.background_color_1;
+    let color1 =  GetNearestValue(layout,breakpoint,'background_color_1');
 
     let result;
 
@@ -23,11 +23,11 @@ const BackGroundChooser = (layout,breakpoint)=>{
 
 const BackGroundImageChooser = (layout,breakpoint)=>{
 
-    let backgroundtype= layout[breakpoint].background?layout[breakpoint].background:layout.md.background;
+    let backgroundtype=  GetNearestValue(layout,breakpoint,'background');
 
-    let color1 = layout[breakpoint].background_color_1?layout[breakpoint].background_color_1:layout.md.background_color_1;
-    let color2 = layout[breakpoint].background_color_2?layout[breakpoint].background_color_2:layout.md.background_color_2;
-    let backgrounStyle = layout[breakpoint].b_gradient_style?layout[breakpoint].b_gradient_style:layout.md.b_gradient_style;
+    let color1 =  GetNearestValue(layout,breakpoint,'background_color_1');
+    let color2 =  GetNearestValue(layout,breakpoint,'background_color_2');
+    let backgrounStyle = GetNearestValue(layout,breakpoint,'b_gradient_style');
 
     let result;
 
@@ -57,25 +57,51 @@ const BackGroundImageChooser = (layout,breakpoint)=>{
 export const DynamicStyles = (layout,breakpoint,id,editorSelected) =>{
 
     return {
-        height:`${layout[breakpoint].height?layout[breakpoint].height:layout.md.height}px`,
-        width:`${layout[breakpoint].width?layout[breakpoint].width:layout.md.width}px`,
-        borderStyle:`${layout[breakpoint].border?layout[breakpoint].border:layout.md.border}`,
-        borderWidth:`${layout[breakpoint].border_width?layout[breakpoint].border_width:layout.md.border_width}px`,
-        borderColor:`${layout[breakpoint].border_color?layout[breakpoint].border_color:layout.md.border_color}`,
+        height:`${GetNearestValue(layout,breakpoint,'height')}px`,
+        width:`${GetNearestValue(layout,breakpoint,'width')}px`,
+        borderStyle:`${GetNearestValue(layout,breakpoint,'border')}`,
+        borderWidth:`${GetNearestValue(layout,breakpoint,'border_width')}px`,
+        borderColor:`${GetNearestValue(layout,breakpoint,'border_color')}`,
         backgroundColor:`${BackGroundChooser(layout,breakpoint)}`,
         backgroundImage:`${BackGroundImageChooser(layout,breakpoint)}`,
         boxSizing:'border-box',
-        padding:`${layout[breakpoint].padding?layout[breakpoint].padding:layout.md.padding}px`,
-        position:`${layout[breakpoint].position?layout[breakpoint].position:layout.md.position}`,
-        left:`${layout[breakpoint].position_left?layout[breakpoint].position_left:layout.md.position_left}%`,
-        top:`${layout[breakpoint].position_top?layout[breakpoint].position_top:layout.md.position_top}%`,
-        transform:`rotate(${layout[breakpoint].rotation?layout[breakpoint].rotation:layout.md.rotation}deg) 
-            scale(${layout[breakpoint].scale_x?layout[breakpoint].scale_x:layout.md.scale_x},
-            ${layout[breakpoint].scale_y?layout[breakpoint].scale_y:layout.md.scale_y})
+        padding:`${GetNearestValue(layout,breakpoint,'padding')}px`,
+        position:`${GetNearestValue(layout,breakpoint,'position')}`,
+        left:`${GetNearestValue(layout,breakpoint,'position_left')}%`,
+        top:`${GetNearestValue(layout,breakpoint,'position_top')}%`,
+        transform:`rotate(${GetNearestValue(layout,breakpoint,'rotation')}deg) 
+            scale(${GetNearestValue(layout,breakpoint,'scale_x')},
+            ${GetNearestValue(layout,breakpoint,'scale_y')})
             `,
         zIndex:`${id === editorSelected ? 100 :
-            layout[breakpoint].z_index?layout[breakpoint].z_index:layout.md.z_index}`
+            GetNearestValue(layout,breakpoint,'z_index')}`
     };
 
 
+};
+
+// Help to Search nearest valuew relative to the breakpoint if it does not exist
+// Needed because some one can start composing using any breakpoint, not necessarily md
+export const GetNearestValue = (layout,breakpoint,attribute) =>{
+    let searchSchema = {
+        xs:['xs','sm','md','lg','xl'],
+        sm:['sm','xs','md','lg','xl'],
+        md:['md','sm','lg','xs','xl'],
+        lg:['lg','md','xl','sm','xs'],
+        xl:['xl','lg','md','sm','xs']
+    };
+
+    // Search Value
+    if(layout[breakpoint] && layout[breakpoint][attribute]){
+        return layout[breakpoint][attribute];
+    }else{
+    // Loop throught Search Schema to find nearest value
+        let value = null;
+        searchSchema[breakpoint].forEach((bk)=>{
+            if(layout[bk] && layout[bk][attribute] && !value){
+                value=layout[bk][attribute];
+            }
+        });
+        return value;
+    }
 };

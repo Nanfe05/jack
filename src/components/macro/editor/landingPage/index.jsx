@@ -12,7 +12,11 @@ import {
     ChangeBreakPoint,
     ChangeEditorHeight,
     EditorClearCanvas,
-    EditorNameChange} from '../../../../redux/actions/editor';
+    EditorNameChange,
+    EditorSetProjectID,
+    EditorSetWholeProject,
+    SwitchIsLoadingContents
+} from '../../../../redux/actions/editor';
 import {SetErrorsMsg,SetSuccessMsg} from '../../../../redux/actions/uiGeneral';
 // Functions
 import {HTMLToJSON} from '../../../micro/editorElements/text/text01/htmlToJson';
@@ -56,16 +60,58 @@ import * as media from '../../../micro/editorElements/media/media01/baseLayout.j
 // Server Communication
 const axios = require('axios');
 
-const SettingProjectEnvironment = () =>{
+const SettingProjectEnvironment = async(
+    EditorSetProjectID,
+    EditorSetWholeProject,
+    SetErrorsMsg,
+    SetSuccessMsg,
+    SwitchIsLoadingContents
+) =>{
     // IS THE PROJECT -> NEW, UPDATE OR FROM LAYOUT ?
     let url = new URL(window.location.href);
     let isupdate = url.searchParams.get('u');
+        isupdate = isupdate === '1' ? true : false;
     let lp_id= url.searchParams.get('lp');
     // ask server for the document if lp 
+    SwitchIsLoadingContents();
+    if(lp_id){
+            try{
+                let obj = {
+                    token: localStorage.getItem('x-jackMarketing-token'),
+                    id:lp_id
+                }
+                let headers={
+                    'content-type':'application/json',
+                }
+                const lps = await axios.post('/jackmarketing/landingpage/content',obj,headers);
+
+                let name = isupdate ? lps.data.content.content.lp_name : null;
+
+                EditorSetWholeProject(
+                    lps.data.content.content.objects,
+                    lps.data.content.content.sizes,
+                    name
+                );
+                console.log(lps.data.content);
+                if(lps.data.success){
+                    SetSuccessMsg(lps.data.success);
+                }
+                // IF Contents are brought correctly set ID to update when save
+                if(isupdate){
+                    EditorSetProjectID(lp_id);
+                }
+                
+            }catch(err){
+                let errors = err.response.data.errors;
+                if(errors){
+                    SetErrorsMsg(errors);
+                }
+                
+            }
+    }
     // set id if update 
     // set server response
     // Work on Back - if save check if user is ownes . save , sent retro 
-    console.log(lp_id);
 };
 
 
@@ -74,13 +120,23 @@ const EditorLandingPage = (props) =>{
 
     // IF NAME IS NULL CHANGE NAME
     useEffect(()=>{
+
         if(props.editor.lp_name.replace(/\s/g,'') === ''){
             props.EditorNameChange(uuidv4());
         }
     });
     useEffect(()=>{
-        SettingProjectEnvironment();
-    });
+        if(props.editor.isLoadingContents){
+            SettingProjectEnvironment(
+                props.EditorSetProjectID,
+                props.EditorSetWholeProject,
+                props.SetErrorsMsg,
+                props.SetSuccessMsg,
+                props.SwitchIsLoadingContents
+            );
+        }
+    // eslint-disable-next-line
+    },[props.editor.isLoadingContents]);
 
 
     const elements = props.editor.objects.length > 0 && props.editor.objects.map((el,i)=>{
@@ -306,6 +362,13 @@ const EditorLandingPage = (props) =>{
                         if(response.data.success){
                             props.SetSuccessMsg(response.data.success);
                         }
+                        // Set ID
+                        if(response.data.id){
+                            //props.EditorSetProjectID(response.data.id);
+                            // parameter to url , if reload continue updating
+                            let url = new URL(`${window.location.href}?lp=${response.data.id}&u=1`);
+                            window.location.replace(url);
+                        }
                         //console.log(response);
                     }catch(err){
                         let errors = err.response.data.errors;
@@ -341,6 +404,9 @@ export default connect(mapStateToProps,{
     EditorClearCanvas,
     EditorNameChange,
     SetErrorsMsg,
-    SetSuccessMsg
+    SetSuccessMsg,
+    EditorSetProjectID,
+    EditorSetWholeProject,
+    SwitchIsLoadingContents
 
 })(EditorLandingPage);

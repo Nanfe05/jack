@@ -120,7 +120,8 @@ const DbLanding = (props) =>{
         key={uuidv4()}
         action={()=>{ // Go to Editor
             window.open(`/editor/landingpage?lp=${el._id}&u=1`,'_blank');
-        }}/>
+        }}
+        />
        );
     }
 

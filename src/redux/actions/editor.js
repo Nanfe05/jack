@@ -60,3 +60,12 @@ export const EditorSetProjectID = (payload) =>({
     type: actionType.EDITOR_SET_PROJECT_ID,
     payload:payload
 });
+export const EditorSetWholeProject = (objects,sizes,name=null)=>({
+    type: actionType.EDITOR_SET_WHOLE_PROJECT,
+    objects,
+    sizes,
+    name
+});
+export const SwitchIsLoadingContents = () =>({
+    type: actionType.EDITOR_SWITCH_IS_LOADING_CONTENTS
+});
