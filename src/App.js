@@ -39,9 +39,9 @@ function App() {
           <Validate>
             <NavBar/>
             <Switch>
-              <PrivateRoute path='/dashboard' component={Dashboard}/>
-              <PrivateRoute path='/editor/landingpage' component={EditorLandingPage}/> 
-              <Route path='/landingpage' component={LandingPageViewer}/>
+              <PrivateRoute path='/dashboard/' component={Dashboard}/>
+              <PrivateRoute path='/editor/landingpage/' component={EditorLandingPage}/> 
+              <Route path='/landingpage/' component={LandingPageViewer}/>
               <PublicRoute path='/' component={Home}/>
             </Switch>
             <Footer/>
