@@ -57,8 +57,8 @@ const BackGroundImageChooser = (layout,breakpoint)=>{
 export const DynamicStyles = (layout,breakpoint,id,editorSelected) =>{
 
     return {
-        height:`${GetNearestValue(layout,breakpoint,'height')}px`,
-        width:`${GetNearestValue(layout,breakpoint,'width')}px`,
+        height:`${GetNearestValue(layout,breakpoint,'height')}%`,
+        width:`${GetNearestValue(layout,breakpoint,'width')}%`,
         borderStyle:`${GetNearestValue(layout,breakpoint,'border')}`,
         borderWidth:`${GetNearestValue(layout,breakpoint,'border_width')}px`,
         borderColor:`${GetNearestValue(layout,breakpoint,'border_color')}`,

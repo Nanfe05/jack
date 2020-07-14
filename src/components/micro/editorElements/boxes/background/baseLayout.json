@@ -15,8 +15,8 @@
             ,
             "md":
                 {
-                "height":190,
-                "width":200,
+                "height":20,
+                "width":20,
                 "border":"none",
                 "border_width":1,
                 "border_color":"#000000",

@@ -14,9 +14,6 @@ const MoveObject = (e,id,EditObject,breakpoint,sizes) =>{
         posx1= e.clientX;
         posy1=e.clientY;
 
-
-
-
         const element = document.getElementById(id);
         
         if(element.style.position !== 'absolute'){
@@ -68,15 +65,19 @@ const MoveObject = (e,id,EditObject,breakpoint,sizes) =>{
         }
 }
 
-const ResizeObject = (e,id,EditObject) =>{
+const ResizeObject = (e,id,EditObject,breakpoint,sizes) =>{
     e.preventDefault();
 
         const element = document.getElementById(id);
 
+        let decimalPlaces = 2;
+        let totalX = sizes[breakpoint].width;
+        let totalY = sizes[breakpoint].height;
+
         let posx1, posx2, posy1,posy2 = 0;
         let size = {
-            x:element.clientWidth,
-            y:element.clientHeight}
+            x:((element.clientWidth*100)/totalX).toFixed(decimalPlaces),
+            y: ((element.clientHeight*100)/totalY).toFixed(decimalPlaces)}
         posx1= e.clientX;
         posy1=e.clientY;
         
@@ -92,11 +93,16 @@ const ResizeObject = (e,id,EditObject) =>{
             posx1=e.clientX;
             posy1=e.clientY;
             
-                size.x -= posx2;
-                size.y -= posy2;
- 
-            element.style.width = `${size.x}px`;
-            element.style.height = `${size.y}px`;
+            let percentageX = ((posx2*100)/totalX).toFixed(decimalPlaces);
+            let percentageY = ((posy2*100)/totalY).toFixed(decimalPlaces);
+
+                // size.x -= posx2;
+                // size.y -= posy2;
+                size.x -= percentageX;
+                size.y -= percentageY;
+
+            element.style.width = `${size.x}%`;
+            element.style.height = `${size.y}%`;
 
         };
         document.onmouseup=(e)=>{
@@ -161,7 +167,7 @@ const SelectedTool = (props) =>{
         <div className='selected_tool_scale scale_3'
          onMouseDown={(e)=>ResizeObject(e,props.id,props.EditObject)}></div> */}
         <div className='selected_tool_scale scale_4'
-         onMouseDown={(e)=>ResizeObject(e,props.id,props.EditObject)}></div>
+         onMouseDown={(e)=>ResizeObject(e,props.id,props.EditObject,props.breakpoint,props.sizes)}></div>
     </Fragment>);
 };
 

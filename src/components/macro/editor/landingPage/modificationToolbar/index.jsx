@@ -30,10 +30,10 @@ const ModificationToolbar = ({editor,EditObject}) =>{
             <div className='row'>
                 <TextField label='Altura' variant='outlined' className='edit_tool' value={GetNearestValue(layout,bk,'height')} onChange={(e)=>{
                     EditObject('height',e.target.value);
-                }}/><h5>px</h5>
+                }}/><h5>%</h5>
                 <TextField label='Ancho' variant='outlined' className='edit_tool' value={GetNearestValue(layout,bk,'width')} onChange={(e)=>{
                     EditObject('width',e.target.value);
-                }}/><h5>px</h5>
+                }}/><h5>%</h5>
             </div>
             </div>
             <div className='col'>
