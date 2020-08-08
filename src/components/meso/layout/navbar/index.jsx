@@ -9,7 +9,7 @@ import {switchHomeTab,switchLogin,switchSignup
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { makeStyles} from '@material-ui/core/styles';
+// import { makeStyles} from '@material-ui/core/styles';
 
 // Components - Micro
 import Logo from '../../../micro/logo';
@@ -29,7 +29,7 @@ NAVBAR OPTIONS
 - NOT LOGGED
 */
     const NotLogged=({navTab,setNavTab,loginForm,signupForm})=>{
-        const style = styles();
+        //const style = styles();
 
         return(
             <AppBar position='static' className={'navbar'}>
@@ -126,11 +126,11 @@ return(
 
 // Styles Edition
 
-const styles = makeStyles(()=>({
-    navbar:{
-        flexDirection:'row'
-    }
-}));
+// const styles = makeStyles(()=>({
+//     navbar:{
+//         flexDirection:'row'
+//     }
+// }));
 
 const mapStateToProps = state => ({
     uiGeneral: state.uiGeneral

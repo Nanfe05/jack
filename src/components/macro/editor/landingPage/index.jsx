@@ -229,14 +229,16 @@ const EditorLandingPage = (props) =>{
     props.editor.topBar === 'img'?
     <div className='topbar_row'>
             <TextField label={'Direccion URL:'}
-            value={layout[bk].url === '/assets/jpgs/nopng.png' ? 'No Image URL': layout[bk].url}
+            value={layout && layout[bk] && layout[bk].url !== '/assets/jpgs/nopng.png' ? layout[bk].url : 'No Image URL'}
             onChange={(e)=>{
+                // TODO onChange set all breakpoints
                 props.EditObject('url',e.target.value)
             }}
             />
             <TextField label={'Nombre:'}
-            value={layout[bk].image_name}
+            value={layout && layout[bk] && layout[bk].image_name ? layout[bk].image_name : ''}
             onChange={(e)=>{
+                 // TODO onChange set all breakpoints
                 props.EditObject('image_name',e.target.value)
             }}
             />
