@@ -32,7 +32,7 @@ NAVBAR OPTIONS
         const style = styles();
 
         return(
-            <AppBar position='static' className={style.navbar}>
+            <AppBar position='static' className={'navbar'}>
             <Logo/>
             <Tabs value={navTab} onChange={(event,newVal)=>setNavTab(newVal)}>
                 <Tab 
@@ -60,8 +60,10 @@ NAVBAR OPTIONS
                     id={`${titles.navBar.learning.replace(' ','').toLowerCase()}_${5}`}
                 />
             </Tabs>
-            <ColorsButton action={loginForm} label='Inicio' classes='blue'/>
-            <ColorsButton action={signupForm} label='Registrate' classes='green'/>
+            <div className='auth_buttons'>
+                <ColorsButton action={loginForm} label='Inicio' classes='blue'/>
+                <ColorsButton action={signupForm} label='Registrate' classes='green'/>
+            </div>
         </AppBar>
         );
     }

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,Fragment} from 'react';
 
 // Redux 
 import {connect} from 'react-redux';
@@ -250,141 +250,148 @@ const EditorLandingPage = (props) =>{
 
 
 
-    return(<div className='editor'>
-        {sideBar}
-        <div className='canvas'>
-            <div className='canvas_header'>
-                 <form className='scale_editor'>
-                     <InputLabel>Escala: </InputLabel>
-                    <Select
-                    value={props.editor.scale}
-                    onChange={(e)=>{
-                        props.EditorScale(e.target.value);
-                    }}
-                    >
-                        <MenuItem value={0.25}>25%</MenuItem>
-                        <MenuItem value={0.5}>50%</MenuItem>
-                        <MenuItem value={0.75}>75%</MenuItem>
-                        <MenuItem value={1}>100%</MenuItem>
-                        <MenuItem value={1.5}>150%</MenuItem>
-                    </Select>
-                 </form>
-            {topBar}
-            </div>
-            <div id='canvas_holder' className='canvas_canvas' onMouseDown={(e)=>{
-                // DESELECT OBJECT IF CLICK ON CANVAS
-                if(e.target.id === 'canvas' || e.target.id === 'canvas_holder'){
-                    if(props.editor.selected){
-                        // Convert to JSON ** If text 
-                        let textElement = document.getElementById(`${props.editor.selected}_content_editable`)
-                        if(textElement){
-                            // console.log('change of content');
-                            // console.log(HTMLToJSON(textElement));
-                            props.EditorEditContent(HTMLToJSON(textElement));
-                        }
-
-                        props.SelectedObject(null);
-                        props.ChangeTopBar(null);
-                    }
-                }
-            }}>
-                    <div id='canvas' className='canvas_editor_landingPage' 
-                        style={{
-                            transform:`scale(${props.editor.scale},${props.editor.scale})`,
-                            width:`${props.editor.sizes[props.editor.breakpoint].width}px`,
-                            height:`${props.editor.sizes[props.editor.breakpoint].height}px`
-                            }}>
-                        {elements}
-                    </div>
-            </div>
-            <div className='canvas_footer'>
-                <ColorsButton label='Borrar Canvas' classes='blue' action={()=>{
-                    props.EditorClearCanvas();
-                }}/>
-                  <div className='breakpoints'>
-                     <span>Break Points:</span>
-                     
-                     <IconButton 
-                     className={`${props.editor.breakpoint === 'xs' ?'selected':''}`}
-                     onClick={()=>{
-                         props.ChangeBreakPoint('xs');
-                     }}>
-                        <PhoneIphoneIcon/>
-                     </IconButton>
-                     <IconButton 
-                     className={`${props.editor.breakpoint === 'sm' ?'selected':''}`}
-                     onClick={()=>{
-                         props.ChangeBreakPoint('sm');
-                     }}>
-                        <TabletAndroidIcon/>
-                     </IconButton>
-                     <IconButton 
-                     className={`${props.editor.breakpoint === 'md' ?'selected':''}`}
-                     onClick={()=>{
-                         props.ChangeBreakPoint('md');
-                     }}>
-                         <LaptopChromebookIcon/>
-                     </IconButton>
-                     <IconButton 
-                     className={`${props.editor.breakpoint === 'lg' ?'selected':''}`}
-                     onClick={()=>{
-                         props.ChangeBreakPoint('lg');
-                     }}>
-                         <DesktopWindowsIcon/>
-                     </IconButton>
-                     <IconButton 
-                     className={`${props.editor.breakpoint === 'xl' ?'selected':''}`}
-                     onClick={()=>{
-                         props.ChangeBreakPoint('xl');
-                     }}>
-                         <PersonalVideoIcon/>
-                     </IconButton>
-                      <TextField className={'footer_toolbar'} label={'X Size:'}
-                        value={props.editor.sizes[props.editor.breakpoint].height}
+    return(
+    <Fragment>
+        <div className='if_no_width'>
+            Necesitas una pantalla mas ancha para usar el editor.
+        </div>
+        <div className='editor'>
+            {sideBar}
+            <div className='canvas'>
+                <div className='canvas_header'>
+                    <form className='scale_editor'>
+                        <InputLabel>Escala: </InputLabel>
+                        <Select
+                        value={props.editor.scale}
                         onChange={(e)=>{
-                            props.ChangeEditorHeight(e.target.value)
+                            props.EditorScale(e.target.value);
                         }}
-                        />
-                 </div>
-                <ColorsButton label='Guardar' classes='green' action={async(e)=>{
-                    e.preventDefault();
+                        >
+                            <MenuItem value={0.25}>25%</MenuItem>
+                            <MenuItem value={0.5}>50%</MenuItem>
+                            <MenuItem value={0.75}>75%</MenuItem>
+                            <MenuItem value={1}>100%</MenuItem>
+                            <MenuItem value={1.5}>150%</MenuItem>
+                        </Select>
+                    </form>
+                {topBar}
+                </div>
+                <div id='canvas_holder' className='canvas_canvas' onMouseDown={(e)=>{
+                    // DESELECT OBJECT IF CLICK ON CANVAS
+                    if(e.target.id === 'canvas' || e.target.id === 'canvas_holder'){
+                        if(props.editor.selected){
+                            // Convert to JSON ** If text 
+                            let textElement = document.getElementById(`${props.editor.selected}_content_editable`)
+                            if(textElement){
+                                // console.log('change of content');
+                                // console.log(HTMLToJSON(textElement));
+                                props.EditorEditContent(HTMLToJSON(textElement));
+                            }
 
-                    let payload = {
-                        token:localStorage.getItem('x-jackMarketing-token'),
-                        payload:props.editor
-                    };
-                    let headers = {
-                        'content-type':'application/json',
-                    };
-                    try{
-                        let response = await axios.post('/jackmarketing/landingpage',payload,headers);
-                        // Set User Message
-                        if(response.data.success){
-                            props.SetSuccessMsg(response.data.success);
-                        }
-                        // Set ID
-                        if(response.data.id){
-                            //props.EditorSetProjectID(response.data.id);
-                            // parameter to url , if reload continue updating
-                            let url = new URL(`${window.location.href}?lp=${response.data.id}&u=1`);
-                            window.location.replace(url);
-                        }
-                        //console.log(response);
-                    }catch(err){
-                        let errors = err.response.data.errors;
-                        if(errors){
-                            //console.log(errors);
-                            setTimeout(()=>{
-                                
-                                props.SetErrorsMsg(errors);
-                            },1000)
+                            props.SelectedObject(null);
+                            props.ChangeTopBar(null);
                         }
                     }
+                }}>
+                        <div id='canvas' className='canvas_editor_landingPage' 
+                            style={{
+                                transform:`scale(${props.editor.scale},${props.editor.scale})`,
+                                width:`${props.editor.sizes[props.editor.breakpoint].width}px`,
+                                height:`${props.editor.sizes[props.editor.breakpoint].height}px`
+                                }}>
+                            {elements}
+                        </div>
+                </div>
+                <div className='canvas_footer'>
+                    <ColorsButton label='Borrar Canvas' classes='blue' action={()=>{
+                        props.EditorClearCanvas();
+                    }}/>
+                    <div className='breakpoints'>
+                        <span>Break Points:</span>
+                        
+                        <IconButton 
+                        className={`${props.editor.breakpoint === 'xs' ?'selected':''}`}
+                        onClick={()=>{
+                            props.ChangeBreakPoint('xs');
+                        }}>
+                            <PhoneIphoneIcon/>
+                        </IconButton>
+                        <IconButton 
+                        className={`${props.editor.breakpoint === 'sm' ?'selected':''}`}
+                        onClick={()=>{
+                            props.ChangeBreakPoint('sm');
+                        }}>
+                            <TabletAndroidIcon/>
+                        </IconButton>
+                        <IconButton 
+                        className={`${props.editor.breakpoint === 'md' ?'selected':''}`}
+                        onClick={()=>{
+                            props.ChangeBreakPoint('md');
+                        }}>
+                            <LaptopChromebookIcon/>
+                        </IconButton>
+                        <IconButton 
+                        className={`${props.editor.breakpoint === 'lg' ?'selected':''}`}
+                        onClick={()=>{
+                            props.ChangeBreakPoint('lg');
+                        }}>
+                            <DesktopWindowsIcon/>
+                        </IconButton>
+                        <IconButton 
+                        className={`${props.editor.breakpoint === 'xl' ?'selected':''}`}
+                        onClick={()=>{
+                            props.ChangeBreakPoint('xl');
+                        }}>
+                            <PersonalVideoIcon/>
+                        </IconButton>
+                        <TextField className={'footer_toolbar'} label={'X Size:'}
+                            value={props.editor.sizes[props.editor.breakpoint].height}
+                            onChange={(e)=>{
+                                props.ChangeEditorHeight(e.target.value)
+                            }}
+                            />
+                    </div>
+                    <ColorsButton label='Guardar' classes='green' action={async(e)=>{
+                        e.preventDefault();
 
-                }}/>
+                        let payload = {
+                            token:localStorage.getItem('x-jackMarketing-token'),
+                            payload:props.editor
+                        };
+                        let headers = {
+                            'content-type':'application/json',
+                        };
+                        try{
+                            let response = await axios.post('/jackmarketing/landingpage',payload,headers);
+                            // Set User Message
+                            if(response.data.success){
+                                props.SetSuccessMsg(response.data.success);
+                            }
+                            // Set ID
+                            if(response.data.id){
+                                //props.EditorSetProjectID(response.data.id);
+                                // parameter to url , if reload continue updating
+                                let url = new URL(`${window.location.href}?lp=${response.data.id}&u=1`);
+                                window.location.replace(url);
+                            }
+                            //console.log(response);
+                        }catch(err){
+                            let errors = err.response.data.errors;
+                            if(errors){
+                                //console.log(errors);
+                                setTimeout(()=>{
+                                    
+                                    props.SetErrorsMsg(errors);
+                                },1000)
+                            }
+                        }
+
+                    }}/>
+                </div>
             </div>
         </div>
-    </div>);
+    </Fragment>
+    );
 }
 
 const mapStateToProps = state => ({

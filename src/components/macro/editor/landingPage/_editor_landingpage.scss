@@ -257,3 +257,21 @@
     height: 30px;
     
 }
+.if_no_width{
+    display: none;
+}
+@media screen and (max-width: 1000px) {
+    .editor{
+        display: none!important;
+    }
+    .if_no_width{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(211, 211, 211, 0.5);
+        height: 90vh;
+        font-family: font_regular;
+        text-align: center;
+        padding: 20px;
+    }
+}

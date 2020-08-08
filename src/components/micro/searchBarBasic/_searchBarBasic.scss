@@ -17,3 +17,11 @@
         color: $grey;
     }
 }
+@media screen and (max-width: 500px) {
+    .searchbar_basic_holder{
+        width: 90%;
+    }
+    .searchbar_basic{
+        width: 100%!important;
+    }
+}

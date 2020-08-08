@@ -3,6 +3,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    > .navbar{
+        flex-direction: row;
+
+    }
     .MuiPaper-root{
         box-shadow: none;
         justify-content: center;
@@ -56,5 +60,34 @@
             font-size: 20px;
             font-family: font-bold;
         }
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .home_navbar{
+        > .navbar{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            > .MuiTabs-root{
+                width: 90%;
+                overflow-x: scroll;
+            }
+        }
+    }
+    .auth_buttons{
+        margin-top: 20px;
+    }
+    
+    // TODO - MENU ON SMALL SCREENS
+    // .MuiTabs-flexContainer{
+    //     overflow-x: scroll;
+    // }
+}
+@media screen and (max-width: 500px) {
+    .dashboard_header{
+        height: auto;
+        padding: 10px;
+        flex-direction: column;
     }
 }
